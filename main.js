@@ -908,41 +908,16 @@ function renderInsights() {
 
 window.purchaseSkin = (skin) => {
   if (skin === 'hat') {
-    if (confirm("Purchase 'Scholar's Gat' for $0.99?")) {
-      // Mock Purchase
-      currentState.user.unlockedSkins = currentState.user.unlockedSkins || [];
-      currentState.user.unlockedSkins.push('hat');
-      currentState.user.paymentHistory.unshift({
-        date: new Date().toLocaleDateString(),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        item: "Scholar's Gat Skin",
-        amount: '$0.99',
-        status: 'Approved'
-      });
-      alert("Purchase Successful! You can now equip the Gat.");
-      renderSettings();
-      saveUserData();
+    if (confirm("Go to store to get 'Scholar's Gat'?")) {
+      window.open('https://link.inpock.co.kr/leegoheun', '_blank');
     }
   }
 };
 
 window.purchaseItem = (item) => {
   if (item === 'club') {
-    if (confirm("Purchase 'Magic Bangmangi' for $1.99?")) {
-      currentState.user.unlockedItems = currentState.user.unlockedItems || [];
-      currentState.user.unlockedItems.push('club');
-      currentState.user.equippedItem = 'club'; // Auto Equip
-      currentState.user.paymentHistory.unshift({
-        date: new Date().toLocaleDateString(),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        item: "Magic Bangmangi",
-        amount: '$1.99',
-        status: 'Approved'
-      });
-      playSound('coin');
-      alert("The Goblin's Club is yours! It has been equipped safely.");
-      renderSettings();
-      saveUserData();
+    if (confirm("Go to store to get 'Magic Club'?")) {
+      window.open('https://link.inpock.co.kr/leegoheun', '_blank');
     }
   }
 }
