@@ -420,7 +420,7 @@ function renderHome() {
               <div style="font-size:10px; opacity:0.6; letter-spacing:1px; color:var(--obang-yellow);">ROYAL GUARDIAN</div>
               <h4 class="serif" style="margin:5px 0 0; font-size:18px;">${currentState.user.name}'s Journey</h4>
             </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Dolsot-bibimbap.jpg/240px-Dolsot-bibimbap.jpg" alt="Bibimbap" style="width:50px; height:50px; border-radius:10px; object-fit:cover; margin-left:auto; border:2px solid var(--obang-yellow); z-index:5; display:block;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Dolsot-bibimbap.jpg/240px-Dolsot-bibimbap.jpg" alt="Bibimbap" style="width:100px; height:100px; border-radius:15px; object-fit:cover; margin-left:auto; border:2px solid var(--obang-yellow); z-index:5; display:block;">
         </div>
       </div>
 
