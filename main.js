@@ -517,13 +517,57 @@ window.handleTigerTap = () => {
 
   // 2. Sound (Attempt)
   if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance("안녕!");
+    const u = new SpeechSynthesisUtterance("안녕! 🐯");
     u.lang = 'ko-KR';
     u.volume = 1.0;
     u.pitch = 1.2;
     u.rate = 1.0;
 
     // Try to find Korean voice explicitely
+    const voices = speechSynthesis.getVoices();
+    const koVoice = voices.find(v => v.lang.includes('ko'));
+    if (koVoice) u.voice = koVoice;
+
+    window.speechSynthesis.speak(u);
+  }
+};
+
+window.handleGoblinTap = () => {
+  const card = document.getElementById('homeGoblin');
+  if (card) {
+    // Animate
+    card.style.transform = "scale(0.95)";
+    setTimeout(() => card.style.transform = "scale(1)", 150);
+
+    // Speech Bubble
+    // Check if bubble exists
+    if (card.querySelector('.goblin-bubble')) return;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'goblin-bubble fade-in';
+    bubble.innerText = "깨비깨비! 👹";
+    bubble.style.position = 'absolute';
+    bubble.style.top = '10px';
+    bubble.style.left = '80px'; // Next to face
+    bubble.style.background = 'var(--obang-black)';
+    bubble.style.color = 'var(--obang-yellow)';
+    bubble.style.padding = '5px 10px';
+    bubble.style.borderRadius = '15px';
+    bubble.style.fontSize = '12px';
+    bubble.style.fontWeight = '800';
+    bubble.style.zIndex = '100';
+    bubble.style.border = '1px solid var(--obang-yellow)';
+    card.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 2000);
+  }
+
+  // Sound
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance("깨비 깨비!");
+    u.lang = 'ko-KR';
+    u.pitch = 1.4; // Synthy/Mischievous
+    u.rate = 1.2;
+
     const voices = speechSynthesis.getVoices();
     const koVoice = voices.find(v => v.lang.includes('ko'));
     if (koVoice) u.voice = koVoice;
