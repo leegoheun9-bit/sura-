@@ -1,4 +1,4 @@
-import './style.css'
+// JavaScript Entry Point
 
 const app = document.querySelector('#app');
 
