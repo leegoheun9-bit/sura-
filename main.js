@@ -497,7 +497,7 @@ window.handleTigerTap = () => {
 
     // Visual Speech Bubble
     const bubble = document.createElement('div');
-    bubble.innerText = "안녕! 🐯";
+    bubble.innerText = "Hello! 🐯";
     bubble.style.position = 'absolute';
     bubble.style.top = '-30px';
     bubble.style.right = '0';
@@ -517,16 +517,11 @@ window.handleTigerTap = () => {
 
   // 2. Sound (Attempt)
   if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance("안녕! 🐯");
-    u.lang = 'ko-KR';
+    const u = new SpeechSynthesisUtterance("Hello!");
+    u.lang = 'en-US';
     u.volume = 1.0;
     u.pitch = 1.2;
     u.rate = 1.0;
-
-    // Try to find Korean voice explicitely
-    const voices = speechSynthesis.getVoices();
-    const koVoice = voices.find(v => v.lang.includes('ko'));
-    if (koVoice) u.voice = koVoice;
 
     window.speechSynthesis.speak(u);
   }
@@ -545,7 +540,7 @@ window.handleGoblinTap = () => {
 
     const bubble = document.createElement('div');
     bubble.className = 'goblin-bubble fade-in';
-    bubble.innerText = "깨비깨비! 👹";
+    bubble.innerText = "Kkaebi! 👹";
     bubble.style.position = 'absolute';
     bubble.style.top = '10px';
     bubble.style.left = '80px'; // Next to face
@@ -563,14 +558,10 @@ window.handleGoblinTap = () => {
 
   // Sound
   if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance("깨비 깨비!");
-    u.lang = 'ko-KR';
+    const u = new SpeechSynthesisUtterance("Kebbi! Kebbi!"); // Phonetic for English
+    u.lang = 'en-US';
     u.pitch = 1.4; // Synthy/Mischievous
     u.rate = 1.2;
-
-    const voices = speechSynthesis.getVoices();
-    const koVoice = voices.find(v => v.lang.includes('ko'));
-    if (koVoice) u.voice = koVoice;
 
     window.speechSynthesis.speak(u);
   }
