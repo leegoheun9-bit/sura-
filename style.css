@@ -87,7 +87,7 @@ body {
 #app {
     width: 100%;
     max-width: 430px;
-    height: 932px;
+    height: 100dvh;
     background: var(--bg-main);
     position: relative;
     overflow-y: auto;
