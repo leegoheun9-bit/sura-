@@ -74,6 +74,11 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-y: scroll;
+    height: 100%;
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     background: #1a1a1a;
@@ -81,8 +86,9 @@ body {
     display: flex;
     justify-content: center;
     /* align-items: center; Remove vertical centering to allow top-down flow */
-    overflow-y: auto;
-    /* Enable native scroll */
+    overflow-y: visible;
+    /* Let html handle scroll or body */
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
