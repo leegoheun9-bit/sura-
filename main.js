@@ -929,10 +929,10 @@ function renderSettings() {
         </div>
         
         <h4 class="serif" style="margin-top:30px; margin-bottom:15px; color:var(--obang-red);">🛍️ Royal Boutique</h4>
-        <div class="meal-list-item" style="padding:15px; background:white; margin-bottom:25px; align-items:center; gap:15px;">
-             <div style="width:50px; height:50px; background:#f9f9f9; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🎩</div>
+        <div class="meal-list-item" style="padding:10px; background:white; margin-bottom:15px; align-items:center; gap:12px;">
+             <div style="width:42px; height:42px; background:#f9f9f9; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px;">🎩</div>
              <div style="flex:1;">
-                 <div style="font-size:14px; font-weight:800; color:var(--obang-black);">Scholar's Gat</div>
+                 <div style="font-size:13px; font-weight:800; color:var(--obang-black);">Scholar's Gat</div>
                  <div style="font-size:10px; opacity:0.6;">Dokkaebi Skin</div>
              </div>
              ${(currentState.user.unlockedSkins && currentState.user.unlockedSkins.includes('hat'))
@@ -940,10 +940,10 @@ function renderSettings() {
       : `<button onclick="purchaseSkin('hat')" style="background:var(--obang-red); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; font-size:11px; cursor:pointer;">$0.99</button>`}
         </div>
         
-        <div class="meal-list-item" style="padding:15px; background:white; margin-bottom:25px; align-items:center; gap:15px; margin-top:-15px;">
-             <div style="width:50px; height:50px; background:#f9f9f9; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🪵</div>
+        <div class="meal-list-item" style="padding:10px; background:white; margin-bottom:15px; align-items:center; gap:12px; margin-top:-5px;">
+             <div style="width:42px; height:42px; background:#f9f9f9; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px;">🪵</div>
              <div style="flex:1;">
-                 <div style="font-size:14px; font-weight:800; color:var(--obang-black);">Magic Bangmangi</div>
+                 <div style="font-size:13px; font-weight:800; color:var(--obang-black);">Magic Bangmangi</div>
                  <div style="font-size:10px; opacity:0.6;">Wish-granting Club</div>
              </div>
              ${(currentState.user.unlockedItems && currentState.user.unlockedItems.includes('club'))
