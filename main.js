@@ -494,17 +494,41 @@ window.handleTigerTap = () => {
   if (icon) {
     icon.style.transform = "scale(1.4) rotate(-10deg)";
     setTimeout(() => icon.style.transform = "scale(1) rotate(0deg)", 300);
+
+    // Visual Speech Bubble
+    const bubble = document.createElement('div');
+    bubble.innerText = "안녕! 🐯";
+    bubble.style.position = 'absolute';
+    bubble.style.top = '-30px';
+    bubble.style.right = '0';
+    bubble.style.background = 'white';
+    bubble.style.color = 'black';
+    bubble.style.padding = '5px 10px';
+    bubble.style.borderRadius = '15px';
+    bubble.style.fontSize = '12px';
+    bubble.style.fontWeight = '800';
+    bubble.style.boxShadow = '0 5px 10px rgba(0,0,0,0.2)';
+    bubble.style.zIndex = '100';
+    bubble.style.whiteSpace = 'nowrap';
+    bubble.className = 'fade-in';
+    icon.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 2000);
   }
 
-  // 2. Sound
+  // 2. Sound (Attempt)
   if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance("안녕!"); // Hello!
+    const u = new SpeechSynthesisUtterance("안녕!");
     u.lang = 'ko-KR';
-    u.pitch = 1.2; // Friendly voice
+    u.volume = 1.0;
+    u.pitch = 1.2;
     u.rate = 1.0;
+
+    // Try to find Korean voice explicitely
+    const voices = speechSynthesis.getVoices();
+    const koVoice = voices.find(v => v.lang.includes('ko'));
+    if (koVoice) u.voice = koVoice;
+
     window.speechSynthesis.speak(u);
-  } else {
-    alert("🐯: 안녕!");
   }
 };
 
