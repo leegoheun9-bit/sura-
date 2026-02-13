@@ -460,7 +460,7 @@ function renderHome() {
                                </div>
                                <div style="position:absolute; right:-5px; bottom:-10px; pointer-events:none; transition: all 1s;">${bloomingLotus(currentState.waterProgress || 0)}</div>
         </div>
-        <div class="meal-list-item" style="flex-direction:column; padding:15px; border-left:4px solid var(--obang-yellow); margin-bottom:0; position:relative;"><div style="position:absolute; right:0; top:0; width:45px; height:45px; opacity:0.8;">${realisticTiger}</div><div style="font-size:10px; font-weight:800; opacity:0.6;">🐯 MOVEMENT</div><div style="font-size:20px; font-weight:800;">6,420 <span style="font-size:10px; opacity:0.4;">Steps</span></div></div>
+        <div class="meal-list-item" onclick="handleTigerTap()" style="flex-direction:column; padding:15px; border-left:4px solid var(--obang-yellow); margin-bottom:0; position:relative; cursor:pointer; active:scale(0.98);"><div id="tigerIconContainer" style="position:absolute; right:0; top:0; width:45px; height:45px; opacity:0.8; transition:transform 0.2s;">${realisticTiger}</div><div style="font-size:10px; font-weight:800; opacity:0.6;">🐯 MOVEMENT</div><div style="font-size:20px; font-weight:800;">6,420 <span style="font-size:10px; opacity:0.4;">Steps</span></div></div>
       </section>
       </section>
       <nav class="nav-bar">
@@ -474,11 +474,8 @@ function renderHome() {
   attach('mainSnapBtn', handlePhotoUpload);
   attach('navHomeLogo', () => navigate('settings'));
   attach('navHomeBadge', () => navigate('settings'));
-  attach('mainSnapBtn', handlePhotoUpload);
-  attach('navHomeLogo', () => navigate('settings'));
-  attach('navHomeBadge', () => navigate('settings'));
   attach('navHomeToProf', () => navigate('settings'));
-  attach('navHomeToInsights', () => navigate('insights'));
+  attach('navHomeToInsights', () => navigate('insights')); // fixed duplicate Attach
 
   if (currentState.pendingReward) {
     setTimeout(() => {
@@ -490,6 +487,26 @@ function renderHome() {
     }, 500);
   }
 }
+
+window.handleTigerTap = () => {
+  // 1. Animate
+  const icon = document.getElementById('tigerIconContainer');
+  if (icon) {
+    icon.style.transform = "scale(1.4) rotate(-10deg)";
+    setTimeout(() => icon.style.transform = "scale(1) rotate(0deg)", 300);
+  }
+
+  // 2. Sound
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance("허흥"); // Heo-heung
+    u.lang = 'ko-KR';
+    u.pitch = 0.5; // Deep voice
+    u.rate = 0.8;
+    window.speechSynthesis.speak(u);
+  } else {
+    alert("🐯: 허흥!");
+  }
+};
 
 function handlePhotoUpload() {
   if (!currentState.user.isPremium && currentState.user.dailyUploads >= 3) {
