@@ -886,99 +886,101 @@ window.equipSkin = (skin) => {
 
 function renderSettings() {
   const historyHtml = currentState.user.paymentHistory && currentState.user.paymentHistory.length > 0
-    ? currentState.user.paymentHistory.map(item => `
-        <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #f0f0f0;">
+    ? currentState.user.paymentHistory.slice(0, 2).map(item => `
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f0f0f0;">
             <div>
-                <div style="font-size:13px; font-weight:800; color:var(--obang-black);">${item.item}</div>
-                <div style="font-size:10px; opacity:0.5; color:var(--obang-black);">${item.date} • ${item.time}</div>
+                <div style="font-size:12px; font-weight:800; color:var(--obang-black);">${item.item}</div>
+                <div style="font-size:9px; opacity:0.5; color:var(--obang-black);">${item.date}</div>
             </div>
             <div style="text-align:right;">
-                <div style="font-size:13px; font-weight:800; color:var(--obang-red);">${item.amount}</div>
-                <div style="font-size:9px; color:var(--obang-blue); font-weight:800;">${item.status}</div>
+                <div style="font-size:12px; font-weight:800; color:var(--obang-red);">${item.amount}</div>
             </div>
         </div>
     `).join('')
-    : `<div style="padding:20px; text-align:center; opacity:0.4; font-size:12px;">No payment records found, traveler.</div>`;
+    : `<div style="padding:10px; text-align:center; opacity:0.4; font-size:11px;">No records found.</div>`;
 
   app.innerHTML = `
-    <div class="screen-wrapper fade-in" style="background:var(--obang-white); height:100%;"><header class="home-header"><button id="setBackBtn" style="background:none; border:none; font-size:32px; color:var(--obang-black); cursor:pointer;">←</button><span class="serif" style="font-weight:800; color:var(--obang-black);">My Profile</span><div style="width:32px;"></div></header>
-      <div style="text-align:center; padding: 20px;"><img src="${currentState.user.profilePic}" style="width:100px; height:100px; border-radius:50%; border:4px solid white; box-shadow:var(--shadow-soft);"><h2 class="serif" style="margin-top:10px; color:var(--obang-black) !important;">${currentState.user.name}</h2></div>
-      <div style="padding: 20px;">
-        <div class="meal-list-item" style="background:var(--obang-black); color:var(--obang-white); padding:20px; margin-bottom:25px; border:1px solid var(--obang-yellow);">
+    <div class="screen-wrapper fade-in" style="background:var(--obang-white); height:100%;"><header class="home-header" style="padding:15px 25px 0;"><button id="setBackBtn" style="background:none; border:none; font-size:28px; color:var(--obang-black); cursor:pointer;">←</button><span class="serif" style="font-weight:800; color:var(--obang-black); font-size:16px;">My Profile</span><div style="width:28px;"></div></header>
+      
+      <div style="text-align:center; padding: 10px 20px 5px; display:flex; align-items:center; justify-content:center; gap:15px;">
+        <img src="${currentState.user.profilePic}" style="width:70px; height:70px; border-radius:50%; border:3px solid white; box-shadow:var(--shadow-soft);">
+        <div style="text-align:left;">
+            <h2 class="serif" style="margin:0; font-size:20px; color:var(--obang-black) !important;">${currentState.user.name}</h2>
+            <div style="font-size:11px; opacity:0.6; color:var(--obang-black);">Royal Traveler</div>
+        </div>
+      </div>
+
+      <div style="padding: 0 20px 80px;">
+        <!-- Membership Compact -->
+        <div class="meal-list-item" style="background:var(--obang-black); color:var(--obang-white); padding:12px 18px; margin-bottom:15px; border:1px solid var(--obang-yellow); align-items:center;">
             <div style="flex:1;">
-                <div style="font-size:10px; color:var(--obang-yellow); font-weight:800; letter-spacing:1px;">MEMBERSHIP</div>
-                <div style="font-size:17px; font-weight:800; margin:5px 0; color:var(--obang-yellow);">${currentState.user.isPremium ? 'Royal Special Management' : 'Free Traveler'}</div>
-                <div style="font-size:11px; opacity:0.9; color:var(--obang-white);">${3 - (currentState.user.dailyUploads || 0)} daily snapshots left</div>
+                <div style="font-size:9px; color:var(--obang-yellow); font-weight:800; letter-spacing:1px;">MEMBERSHIP</div>
+                <div style="font-size:14px; font-weight:800; margin:2px 0 0; color:var(--obang-yellow);">${currentState.user.isPremium ? 'Royal Special Management' : 'Free Traveler'}</div>
             </div>
-            ${!currentState.user.isPremium ? `<button id="setUpgradeBtn" style="background:var(--obang-yellow); color:var(--obang-black); border:none; padding:10px 18px; border-radius:12px; font-weight:800; font-size:12px; cursor:pointer;">Upgrade</button>` : ''}
+            ${!currentState.user.isPremium ? `<button id="setUpgradeBtn" style="background:var(--obang-yellow); color:var(--obang-black); border:none; padding:6px 12px; border-radius:8px; font-weight:800; font-size:11px; cursor:pointer;">Upgrade</button>` : ''}
         </div>
 
-        <h4 class="serif" style="margin-bottom:10px; font-size:16px; color:var(--obang-black);">🏅 Norigae Collection</h4>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:15px; margin-top:10px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 class="serif" style="font-size:14px; color:var(--obang-black);">🏅 Norigae</h4>
+            <span style="font-size:10px; opacity:0.5;">Collection</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:20px;">
           ${[
       { name: 'Hope', color: 'var(--obang-blue)', req: 1 },
       { name: 'Passion', color: 'var(--obang-red)', req: 2 },
       { name: 'Balance', color: 'var(--obang-yellow)', req: 3 }
     ].map(n => {
       const isUnlocked = currentState.user.norigaeCount >= n.req;
-      return `<div class="norigae-item" style="${isUnlocked ? '' : 'opacity:0.3; filter:grayscale(1);'}">
-                <div style="width:40px; height:60px; margin:0 auto 10px;">${norigaeSVG(n.color)}</div>
-                <div style="font-size:10px; font-weight:800; color:var(--obang-black);">${n.name}</div>
-                ${!isUnlocked ? `<div style="font-size:8px; margin-top:5px; color:#888;">${n.req === 2 ? '3 Meals' : 'Premium'}</div>` : ''}
+      return `<div class="norigae-item" style="padding:10px; ${isUnlocked ? '' : 'opacity:0.3; filter:grayscale(1);'}">
+                <div style="width:25px; height:40px; margin:0 auto 5px;">${norigaeSVG(n.color)}</div>
+                <div style="font-size:9px; font-weight:800; color:var(--obang-black); text-align:center;">${n.name}</div>
               </div>`;
     }).join('')}
         </div>
         
-        <h4 class="serif" style="margin-top:30px; margin-bottom:15px; color:var(--obang-red);">🛍️ Royal Boutique</h4>
-        <div class="meal-list-item" style="padding:10px; background:white; margin-bottom:15px; align-items:center; gap:12px;">
-             <div style="width:42px; height:42px; background:#f9f9f9; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px;">🎩</div>
-             <div style="flex:1;">
-                 <div style="font-size:13px; font-weight:800; color:var(--obang-black);">Scholar's Gat</div>
-                 <div style="font-size:10px; opacity:0.6;">Dokkaebi Skin</div>
-             </div>
-             ${(currentState.user.unlockedSkins && currentState.user.unlockedSkins.includes('hat'))
-      ? `<button onclick="equipSkin('hat')" style="background:${currentState.user.equippedSkin === 'hat' ? 'var(--obang-black)' : 'white'}; color:${currentState.user.equippedSkin === 'hat' ? 'white' : 'var(--obang-black)'}; border:1px solid var(--obang-black); padding:8px 15px; border-radius:10px; font-weight:800; font-size:11px; cursor:pointer;">${currentState.user.equippedSkin === 'hat' ? 'Unequip' : 'Equip'}</button>`
-      : `<button onclick="purchaseSkin('hat')" style="background:var(--obang-red); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; font-size:11px; cursor:pointer;">$0.99</button>`}
+        <h4 class="serif" style="margin-bottom:8px; font-size:14px; color:var(--obang-red);">🛍️ Royal Boutique</h4>
+        <!-- Grid Layout for Boutique -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:20px;">
+            <!-- Hat -->
+            <div class="meal-list-item" style="padding:12px; background:white; margin:0; flex-direction:column; gap:8px; text-align:center;">
+                 <div style="font-size:24px;">🎩</div>
+                 <div>
+                     <div style="font-size:12px; font-weight:800; color:var(--obang-black);">Scholar's Gat</div>
+                 </div>
+                 ${(currentState.user.unlockedSkins && currentState.user.unlockedSkins.includes('hat'))
+      ? `<button onclick="equipSkin('hat')" style="background:${currentState.user.equippedSkin === 'hat' ? 'var(--obang-black)' : 'white'}; color:${currentState.user.equippedSkin === 'hat' ? 'white' : 'var(--obang-black)'}; border:1px solid var(--obang-black); padding:5px 10px; border-radius:8px; font-weight:800; font-size:10px; cursor:pointer; width:100%;">${currentState.user.equippedSkin === 'hat' ? 'Unequip' : 'Equip'}</button>`
+      : `<button onclick="purchaseSkin('hat')" style="background:var(--obang-red); color:white; border:none; padding:5px 10px; border-radius:8px; font-weight:800; font-size:10px; cursor:pointer; width:100%;">$0.99</button>`}
+            </div>
+            
+            <!-- Club -->
+            <div class="meal-list-item" style="padding:12px; background:white; margin:0; flex-direction:column; gap:8px; text-align:center;">
+                 <div style="font-size:24px;">🪵</div>
+                 <div>
+                     <div style="font-size:12px; font-weight:800; color:var(--obang-black);">Magic Club</div>
+                 </div>
+                 ${(currentState.user.unlockedItems && currentState.user.unlockedItems.includes('club'))
+      ? `<button onclick="equipItem('club')" style="background:${currentState.user.equippedItem === 'club' ? 'var(--obang-black)' : 'white'}; color:${currentState.user.equippedItem === 'club' ? 'white' : 'var(--obang-black)'}; border:1px solid var(--obang-black); padding:5px 10px; border-radius:8px; font-weight:800; font-size:10px; cursor:pointer; width:100%;">${currentState.user.equippedItem === 'club' ? 'Unequip' : 'Equip'}</button>`
+      : `<button onclick="purchaseItem('club')" style="background:var(--obang-red); color:white; border:none; padding:5px 10px; border-radius:8px; font-weight:800; font-size:10px; cursor:pointer; width:100%;">$1.99</button>`}
+            </div>
         </div>
         
-        <div class="meal-list-item" style="padding:10px; background:white; margin-bottom:15px; align-items:center; gap:12px; margin-top:-5px;">
-             <div style="width:42px; height:42px; background:#f9f9f9; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px;">🪵</div>
-             <div style="flex:1;">
-                 <div style="font-size:13px; font-weight:800; color:var(--obang-black);">Magic Bangmangi</div>
-                 <div style="font-size:10px; opacity:0.6;">Wish-granting Club</div>
-             </div>
-             ${(currentState.user.unlockedItems && currentState.user.unlockedItems.includes('club'))
-      ? `<button onclick="equipItem('club')" style="background:${currentState.user.equippedItem === 'club' ? 'var(--obang-black)' : 'white'}; color:${currentState.user.equippedItem === 'club' ? 'white' : 'var(--obang-black)'}; border:1px solid var(--obang-black); padding:8px 15px; border-radius:10px; font-weight:800; font-size:11px; cursor:pointer;">${currentState.user.equippedItem === 'club' ? 'Unequip' : 'Equip'}</button>`
-      : `<button onclick="purchaseItem('club')" style="background:var(--obang-red); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; font-size:11px; cursor:pointer;">$1.99</button>`}
-        </div>
-        
-        <h4 class="serif" style="margin-top:10px; margin-bottom:15px; color:var(--obang-blue);">📏 Physical Profile</h4>
-        <div class="meal-list-item" style="padding:22px; border-left: 5px solid var(--obang-blue); background:white; display:flex; flex-direction:column; gap:15px; margin-bottom:25px;">
-            <div style="display:flex; justify-content:space-between; width:100%;">
-                <div style="text-align:center; flex:1;"><div style="font-size:10px; opacity:0.5; color:var(--obang-black);">GENDER</div><div style="font-size:16px; font-weight:800; color:var(--obang-black);">${currentState.user.gender}</div></div>
-                <div style="width:1px; background:#f0f0f0;"></div>
-                <div style="text-align:center; flex:1;"><div style="font-size:10px; opacity:0.5; color:var(--obang-black);">BIRTH DATE</div><div style="font-size:16px; font-weight:800; color:var(--obang-black);">${currentState.user.birthDate || 'Not Set'}</div></div>
-            </div>
-            <div style="height:1px; background:#f0f0f0; width:100%;"></div>
-            <div style="display:flex; justify-content:space-between; width:100%;">
-                <div style="text-align:center; flex:1;"><div style="font-size:10px; opacity:0.5; color:var(--obang-black);">HEIGHT</div><div style="font-size:16px; font-weight:800; color:var(--obang-black);">${currentState.user.height} cm</div></div>
-                <div style="width:1px; background:#f0f0f0;"></div>
-                <div style="text-align:center; flex:1;"><div style="font-size:10px; opacity:0.5; color:var(--obang-black);">WEIGHT</div><div style="font-size:16px; font-weight:800; color:var(--obang-black);">${currentState.user.weight} kg</div></div>
-            </div>
+        <h4 class="serif" style="margin-bottom:8px; font-size:14px; color:var(--obang-blue);">📏 Physical Profile</h4>
+        <div class="meal-list-item" style="padding:15px; border-left: 4px solid var(--obang-blue); background:white; display:flex; justify-content:space-between; margin-bottom:15px; align-items:center;">
+            <div style="text-align:center;"><div style="font-size:9px; opacity:0.5;">GENDER</div><div style="font-size:13px; font-weight:800;">${currentState.user.gender}</div></div>
+            <div style="width:1px; height:20px; background:#f0f0f0;"></div>
+            <div style="text-align:center;"><div style="font-size:9px; opacity:0.5;">HEIGHT</div><div style="font-size:13px; font-weight:800;">${currentState.user.height}</div></div>
+            <div style="width:1px; height:20px; background:#f0f0f0;"></div>
+            <div style="text-align:center;"><div style="font-size:9px; opacity:0.5;">WEIGHT</div><div style="font-size:13px; font-weight:800;">${currentState.user.weight}</div></div>
         </div>
 
-        <h4 class="serif" style="margin-bottom:10px; font-size:16px; color:var(--obang-black);">🏛️ Payment History</h4>
-        <div class="meal-list-item" style="padding:15px 22px; background:white; flex-direction:column; margin-bottom:25px;">
-            ${historyHtml}
-        </div>
-        <button id="setResetBtn" style="width:100%; border:none; background:#fff2f2; color:var(--obang-red); padding:20px; border-radius:20px; font-weight:800; margin-top:20px; cursor:pointer;">Reset Profile</button>
+        <button id="setResetBtn" style="width:100%; border:none; background:none; color:#aaa; padding:10px; font-size:11px; cursor:pointer; text-decoration:underline;">Reset Data</button>
       </div >
     </div >
   `;
   attach('setBackBtn', () => navigate('home'));
   attach('setUpgradeBtn', showUpgradeModal);
   attach('setResetBtn', () => {
-    if (confirm("Shall we clear your journey data, traveler?")) {
+    if (confirm("Clear all data?")) {
       localStorage.removeItem('sura_user_data');
       window.location.reload();
     }
