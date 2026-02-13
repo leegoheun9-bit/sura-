@@ -796,13 +796,13 @@ function renderAnalysis() {
          <div class="meal-list-item" style="flex-direction:column; padding:20px 25px; margin-top:10px; background:white;">
             <div style="font-size:10px; opacity:0.5; margin-bottom:12px; letter-spacing:1px; text-align:center; font-weight:800; color:var(--obang-black);">ROYAL PANTRY SELECTION</div>
             ${(() => {
-      let product = { name: "Organic Omija Tea", desc: "Balance your palate", icon: "🍵", link: "#" };
+      let product = { name: "Organic Omija Tea", desc: "Balance your palate", icon: "🍵", link: "https://link.inpock.co.kr/leegoheun" };
       if (lastMeal.carbs > lastMeal.protein * 2) {
-        product = { name: "Konjac Jelly Pouch", desc: "Lightness for the body", icon: "🧊", link: "https://www.coupang.com" };
+        product = { name: "Konjac Jelly Pouch", desc: "Lightness for the body", icon: "🧊", link: "https://link.inpock.co.kr/leegoheun" };
       } else if (lastMeal.fat > lastMeal.protein) {
-        product = { name: "Premium Green Tea", desc: "Cleanses the oil", icon: "🌱", link: "https://www.coupang.com" };
+        product = { name: "Premium Green Tea", desc: "Cleanses the oil", icon: "🌱", link: "https://link.inpock.co.kr/leegoheun" };
       } else if (lastMeal.protein > lastMeal.carbs) {
-        product = { name: "Sparkling Water", desc: "Cooling hydration", icon: "💧", link: "https://www.coupang.com" };
+        product = { name: "Sparkling Water", desc: "Cooling hydration", icon: "💧", link: "https://link.inpock.co.kr/leegoheun" };
       }
 
       return `
