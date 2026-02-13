@@ -98,9 +98,9 @@ body {
     transition: var(--transition);
 }
 
-#app::-webkit-scrollbar {
-    display: none;
-}
+/* #app::-webkit-scrollbar {
+    display: none; 
+} */
 
 h1,
 h2,
