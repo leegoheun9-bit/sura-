@@ -498,13 +498,13 @@ window.handleTigerTap = () => {
 
   // 2. Sound
   if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance("허흥"); // Heo-heung
+    const u = new SpeechSynthesisUtterance("안녕!"); // Hello!
     u.lang = 'ko-KR';
-    u.pitch = 0.5; // Deep voice
-    u.rate = 0.8;
+    u.pitch = 1.2; // Friendly voice
+    u.rate = 1.0;
     window.speechSynthesis.speak(u);
   } else {
-    alert("🐯: 허흥!");
+    alert("🐯: 안녕!");
   }
 };
 
