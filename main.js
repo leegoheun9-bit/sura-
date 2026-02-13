@@ -656,13 +656,14 @@ function showUpgradeModal() {
   okOverlay.innerHTML = `
         <div class="premium-card">
             <div style="width:100px; height:100px; margin:0 auto 20px;">${realisticGoblin('sad')}</div>
-            <h2 class="serif">Your Daily Lives are Empty</h2>
-            <p style="font-size:13px; opacity:0.7; margin:15px 0 25px;">Become a <b>'Royal Special Management'</b> member to enjoy unlimited AI wisdom.</p>
-            <button class="primary-btn" id="modalUpgradeBtn" style="background:var(--obang-yellow); color:var(--obang-black); margin-bottom:12px;">👑 Royal Upgrade ($4.99/mo)</button>
-            <button class="primary-btn" id="modalCloseBtn" style="background:#eee; color:#666; padding:15px; font-size:14px;">Maybe tomorrow</button>
+            <h2 class="serif" style="font-size:20px; word-break:keep-all;">오늘의 촬영 횟수를<br>모두 쓰셨네요!</h2>
+            <p style="font-size:13px; opacity:0.7; margin:15px 0 25px; word-break:keep-all;"><b>'왕실 특별 관리(Royal)'</b> 회원이 되어<br>무제한으로 수라상을 관리받으세요.</p>
+            <button class="primary-btn" id="modalUpgradeBtn" style="background:var(--obang-yellow); color:var(--obang-black); margin-bottom:12px;">👑 왕실 회원 승격 ($4.99/월)</button>
+            <button class="primary-btn" id="modalCloseBtn" style="background:#eee; color:#666; padding:15px; font-size:14px;">다음에 할게요</button>
         </div>
     `;
   document.body.appendChild(okOverlay);
+  // Auto close removed to enforce choice? or keep timer? Keep timer for UX
   const autoTimer = setTimeout(() => { if (okOverlay && okOverlay.parentNode) okOverlay.remove(); }, 6000);
 
   document.getElementById('modalUpgradeBtn').onclick = (e) => {
@@ -683,35 +684,31 @@ function showPaymentProcessing() {
   processing.innerHTML = `
         <div style="text-align:center; color:white;">
             <div class="loading-royal" style="width:80px; height:80px; margin:0 auto 30px; border:3px solid var(--obang-yellow); border-top-color:transparent; border-radius:50%; animation: spin 1s linear infinite;"></div>
-            <h2 class="serif" style="letter-spacing:2px;">Contacting Royal Treasury...</h2>
-            <p style="font-size:12px; opacity:0.6; margin-top:15px;">Authenticating your special management status.</p>
+            <h2 class="serif" style="letter-spacing:1px; margin-bottom:10px;">왕실 금고와 연결 중...</h2>
+            <p style="font-size:12px; opacity:0.6;">잠시만 기다려주세요.</p>
         </div>
     `;
   document.body.appendChild(processing);
+  setTimeout(() => finalizeUpgrade(processing), 3000);
+}
+
+function finalizeUpgrade(overlay) {
+  overlay.innerHTML = `
+        <div style="text-align:center; color:white;" class="fade-in">
+             <div style="font-size:60px; margin-bottom:20px;">👑</div>
+             <h2 class="serif">승인 완료!</h2>
+             <p style="opacity:0.8; margin-top:10px; word-break:keep-all;">이제 왕실의 가족이 되셨습니다.<br>무제한 혜택을 누리세요.</p>
+        </div>
+    `;
+  playSound('magic');
+
+  currentState.user.isPremium = true;
+  currentState.user.dailyUploads = 0;
+  saveUserData();
 
   setTimeout(() => {
-    processing.innerHTML = `
-            <div style="text-align:center; color:white; animation: scale-up 0.5s forwards;">
-                <div style="font-size:80px; margin-bottom:20px;">👑</div>
-                <h2 class="serif" style="color:var(--obang-yellow);">Subscription Confirmed</h2>
-                <p style="font-size:14px; margin:15px 0 30px;">Welcome to the Inner Circle, Traveler.</p>
-                <div style="width:120px; height:1px; background:var(--obang-yellow); margin:0 auto; opacity:0.5;"></div>
-            </div>
-        `;
-    currentState.user.isPremium = true;
-    // Record payment history
-    currentState.user.paymentHistory.unshift({
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      item: 'Royal Special Management',
-      amount: '$4.99',
-      status: 'Approved'
-    });
-    saveUserData();
-    setTimeout(() => {
-      processing.remove();
-      navigate('home');
-    }, 2000);
+    overlay.remove();
+    renderHome();
   }, 2500);
 }
 
