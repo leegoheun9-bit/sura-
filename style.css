@@ -1,0 +1,510 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    /* Obangsaek Palette */
+    --obang-white: #FCFAf2;
+    --obang-black: #1A1A1A;
+    --obang-blue: #2E5A88;
+    --obang-red: #B22222;
+    --obang-yellow: #E5B200;
+
+    /* Defaults */
+    --bg-main: var(--obang-white);
+    --bg-card: white;
+    --text-main: var(--obang-black);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- [Dynamic Mood Classes] --- */
+#app.mood-morning {
+    --bg-main: #FDF5E6;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --text-main: #5D4037;
+}
+
+#app.mood-morning::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(229, 178, 0, 0.1), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+#app.mood-day {
+    --bg-main: #FCFAf2;
+    --bg-card: white;
+    --text-main: var(--obang-black);
+}
+
+#app.mood-night {
+    --bg-main: #141E30;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --text-main: #E0E0E0;
+}
+
+#app.mood-night .user-badge,
+#app.mood-night .meal-list-item,
+#app.mood-night .seasonal-card,
+#app.mood-night .nav-bar,
+#app.mood-night .norigae-item,
+#app.mood-night .onboarding-card {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+#app.mood-night h1,
+#app.mood-night h2,
+#app.mood-night h3,
+#app.mood-night .kcal-num,
+#app.mood-night label {
+    color: white !important;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 430px;
+    height: 932px;
+    background: var(--bg-main);
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+#app::-webkit-scrollbar {
+    display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+.serif {
+    font-family: 'Noto Serif KR', serif;
+}
+
+.screen-wrapper {
+    padding-bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Onboarding Specific */
+.onboarding-screen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.onboarding-card {
+    background: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-soft);
+    width: 100%;
+    margin-top: -50px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--obang-blue);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--obang-yellow);
+    background: white;
+}
+
+.primary-btn {
+    width: 100%;
+    background: var(--obang-black);
+    color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gender-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--obang-black);
+}
+
+.gender-btn.active {
+    background: var(--obang-blue);
+    color: white;
+    border-color: var(--obang-blue);
+}
+
+/* Components */
+.home-header {
+    padding: 30px 25px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    padding: 6px 16px 6px 6px;
+    border-radius: 40px;
+    box-shadow: var(--shadow-soft);
+}
+
+.avatar-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--obang-blue);
+    overflow: hidden;
+}
+
+.seasonal-card {
+    margin: 15px 25px 5px;
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 15px 20px;
+    border-left: 5px solid var(--obang-yellow);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.seasonal-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--obang-yellow);
+    letter-spacing: 2px;
+}
+
+.dashboard-stats {
+    padding: 10px 25px;
+    text-align: center;
+}
+
+.main-gauge {
+    width: 160px;
+    height: 160px;
+    margin: 10px auto;
+    border-radius: 50%;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid rgba(229, 178, 0, 0.1);
+}
+
+.main-gauge::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    background: conic-gradient(var(--obang-blue) 0deg 90deg, var(--obang-red) 90deg 180deg, var(--obang-yellow) 180deg 270deg, var(--obang-black) 270deg 360deg);
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.kcal-num {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.middle-action {
+    padding: 20px 25px 0;
+    margin-top: 15px;
+}
+
+.camera-btn-large {
+    width: 100%;
+    background: var(--obang-black);
+    border-radius: 40px;
+    padding: 24px 20px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.camera-btn-large::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, var(--obang-yellow), transparent 30%);
+    animation: rotate 4s linear infinite;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.camera-btn-large:active {
+    transform: scale(0.94);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.camera-btn-large .snap-label {
+    color: var(--obang-yellow);
+    font-size: 11px !important;
+    letter-spacing: 3px !important;
+    opacity: 1 !important;
+}
+
+.camera-btn-large .snap-title {
+    font-size: 26px !important;
+    font-weight: 800;
+}
+
+.meal-list-item {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 15px;
+    box-shadow: var(--shadow-soft);
+}
+
+.nav-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 95px;
+    background: var(--bg-card);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 25px;
+}
+
+.nav-link {
+    font-size: 11px;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link.active {
+    color: var(--obang-yellow);
+    font-weight: 800;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Ink Transition */
+.ink-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ink-transition::before,
+.ink-transition::after,
+.ink-transition .inner-ink {
+    content: '';
+    position: absolute;
+    width: 250vw;
+    height: 250vh;
+    background: radial-gradient(circle at center, #1A1A1A 0%, #1A1A1A 40%, transparent 70%);
+    filter: blur(40px);
+    opacity: 0;
+    transform: scale(0);
+}
+
+.ink-transition::before {
+    animation: inkBloom 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.ink-transition::after {
+    background: radial-gradient(circle at 30% 40%, #2A2A2A 0%, transparent 60%);
+    animation: inkBloom 2s cubic-bezier(0.23, 1, 0.32, 1) 0.1s forwards;
+}
+
+.ink-transition .inner-ink {
+    background: radial-gradient(circle at 70% 60%, var(--obang-black) 0%, transparent 50%);
+    animation: inkBloom 1.6s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
+}
+
+@keyframes inkBloom {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    100% {
+        transform: scale(2.5) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* --- [MONETIZATION STYLES] --- */
+.premium-modal-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 20000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.premium-card {
+    background: var(--obang-white);
+    padding: 40px 30px;
+    border-radius: 40px;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--obang-yellow);
+}
+
+.ad-screen {
+    position: relative;
+    overflow: hidden;
+}

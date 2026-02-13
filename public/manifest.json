@@ -1,0 +1,16 @@
+{
+  "name": "SURA AI - Royal Wellness",
+  "short_name": "SURA AI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FCFAf2",
+  "theme_color": "#141E30",
+  "icons": [
+    {
+      "src": "dokkaebi-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
