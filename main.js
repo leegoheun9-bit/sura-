@@ -951,7 +951,7 @@ function renderSettings() {
       : `<button onclick="purchaseItem('club')" style="background:var(--obang-red); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight:800; font-size:11px; cursor:pointer;">$1.99</button>`}
         </div>
         
-        <h4 class="serif" style="margin-top:30px; margin-bottom:15px; color:var(--obang-blue);">📏 Physical Profile</h4>
+        <h4 class="serif" style="margin-top:10px; margin-bottom:15px; color:var(--obang-blue);">📏 Physical Profile</h4>
         <div class="meal-list-item" style="padding:22px; border-left: 5px solid var(--obang-blue); background:white; display:flex; flex-direction:column; gap:15px; margin-bottom:25px;">
             <div style="display:flex; justify-content:space-between; width:100%;">
                 <div style="text-align:center; flex:1;"><div style="font-size:10px; opacity:0.5; color:var(--obang-black);">GENDER</div><div style="font-size:16px; font-weight:800; color:var(--obang-black);">${currentState.user.gender}</div></div>
