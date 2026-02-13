@@ -656,10 +656,10 @@ function showUpgradeModal() {
   okOverlay.innerHTML = `
         <div class="premium-card">
             <div style="width:100px; height:100px; margin:0 auto 20px;">${realisticGoblin('sad')}</div>
-            <h2 class="serif" style="font-size:20px; word-break:keep-all;">오늘의 촬영 횟수를<br>모두 쓰셨네요!</h2>
-            <p style="font-size:13px; opacity:0.7; margin:15px 0 25px; word-break:keep-all;"><b>'왕실 특별 관리(Royal)'</b> 회원이 되어<br>무제한으로 수라상을 관리받으세요.</p>
-            <button class="primary-btn" id="modalUpgradeBtn" style="background:var(--obang-yellow); color:var(--obang-black); margin-bottom:12px;">👑 왕실 회원 승격 ($4.99/월)</button>
-            <button class="primary-btn" id="modalCloseBtn" style="background:#eee; color:#666; padding:15px; font-size:14px;">다음에 할게요</button>
+            <h2 class="serif" style="font-size:20px;">Out of Royal Glances<br>for today!</h2>
+            <p style="font-size:13px; opacity:0.7; margin:15px 0 25px;">Become a <b>'Royal Special Management'</b> member<br>to enjoy unlimited AI wisdom.</p>
+            <button class="primary-btn" id="modalUpgradeBtn" style="background:var(--obang-yellow); color:var(--obang-black); margin-bottom:12px;">👑 Royal Upgrade ($4.99/mo)</button>
+            <button class="primary-btn" id="modalCloseBtn" style="background:#eee; color:#666; padding:15px; font-size:14px;">Maybe tomorrow</button>
         </div>
     `;
   document.body.appendChild(okOverlay);
@@ -684,8 +684,8 @@ function showPaymentProcessing() {
   processing.innerHTML = `
         <div style="text-align:center; color:white;">
             <div class="loading-royal" style="width:80px; height:80px; margin:0 auto 30px; border:3px solid var(--obang-yellow); border-top-color:transparent; border-radius:50%; animation: spin 1s linear infinite;"></div>
-            <h2 class="serif" style="letter-spacing:1px; margin-bottom:10px;">왕실 금고와 연결 중...</h2>
-            <p style="font-size:12px; opacity:0.6;">잠시만 기다려주세요.</p>
+            <h2 class="serif" style="letter-spacing:1px; margin-bottom:10px;">Contacting Royal Treasury...</h2>
+            <p style="font-size:12px; opacity:0.6;">Please wait...</p>
         </div>
     `;
   document.body.appendChild(processing);
@@ -696,8 +696,8 @@ function finalizeUpgrade(overlay) {
   overlay.innerHTML = `
         <div style="text-align:center; color:white;" class="fade-in">
              <div style="font-size:60px; margin-bottom:20px;">👑</div>
-             <h2 class="serif">승인 완료!</h2>
-             <p style="opacity:0.8; margin-top:10px; word-break:keep-all;">이제 왕실의 가족이 되셨습니다.<br>무제한 혜택을 누리세요.</p>
+             <h2 class="serif">Membership Approved!</h2>
+             <p style="opacity:0.8; margin-top:10px;">Welcome to the Royal Family.<br>Unlimited access granted.</p>
         </div>
     `;
   playSound('magic');
