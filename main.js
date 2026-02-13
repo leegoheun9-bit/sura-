@@ -659,8 +659,9 @@ function showUpgradeModal() {
 
   document.getElementById('modalUpgradeBtn').onclick = (e) => {
     clearTimeout(autoTimer);
+    // Open external link as requested
+    window.open('https://link.inpock.co.kr/leegoheun', '_blank');
     okOverlay.remove();
-    showPaymentProcessing();
   };
   document.getElementById('modalCloseBtn').onclick = () => {
     clearTimeout(autoTimer);
