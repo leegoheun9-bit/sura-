@@ -80,18 +80,23 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    /* align-items: center; Remove vertical centering to allow top-down flow */
+    overflow-y: auto;
+    /* Enable native scroll */
+    -webkit-overflow-scrolling: touch;
 }
 
 #app {
     width: 100%;
     max-width: 430px;
-    height: 100dvh;
+    min-height: 100vh;
+    /* Ensure full usage */
+    height: auto;
+    /* grow with content */
     background: var(--bg-main);
     position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: visible;
+    /* Let body handle scroll */
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
@@ -364,9 +369,12 @@ h4,
 }
 
 .nav-bar {
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 430px;
     height: 95px;
     background: var(--bg-card);
     display: flex;
