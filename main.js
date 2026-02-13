@@ -1072,4 +1072,46 @@ function startFloatingHangul() {
   }, 800); // New word every 0.8s
 }
 
-startFloatingHangul();
+// --- Data Persistence ---
+window.saveUserData = () => {
+  localStorage.setItem('suraState', JSON.stringify(currentState));
+};
+
+function loadUserData() {
+  const saved = localStorage.getItem('suraState');
+  if (saved) {
+    try {
+      Object.assign(currentState, JSON.parse(saved));
+    } catch (e) { console.error('Data error', e); }
+  } else {
+    // Default State if fresh install
+    if (!currentState.waterProgress) currentState.waterProgress = 0;
+    if (!currentState.user) currentState.user = { name: "SURA User", profilePic: "dokkaebi-icon.svg", theme: "default" };
+  }
+}
+
+// --- Application Boot ---
+function init() {
+  // 1. Load Data
+  loadUserData();
+
+  // 2. Render Home Screen
+  renderHome();
+
+  // 3. Start Effects
+  startFloatingHangul();
+
+  // 4. Reveal App (Fade In)
+  const appEl = document.getElementById('app');
+  if (appEl) {
+    appEl.style.opacity = '1';
+    appEl.style.transition = 'opacity 1s ease-in';
+  }
+}
+
+// Attach Init
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
