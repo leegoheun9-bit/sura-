@@ -836,14 +836,16 @@ function renderAnalysis() {
   // Share Button Logic
   attach('anShareBtn', () => {
     const verdict = window.currentVerdict || { title: "Royal Analysis", desc: "Check this out!" };
+    const shareUrl = `https://leegoheun9-bit.github.io/sura-/?title=${encodeURIComponent(verdict.title)}&desc=${encodeURIComponent(verdict.desc)}`;
+
     if (navigator.share) {
       navigator.share({
         title: 'Sura AI Verdict',
         text: `[Sura AI] My Meal Verdict: ${verdict.title}\n"${verdict.desc}"\n\nAnalyze yours here:`,
-        url: 'https://leegoheun9-bit.github.io/sura-/'
+        url: shareUrl
       }).catch(console.error);
     } else {
-      prompt("Copy this link to share:", `[Sura AI] ${verdict.title} - https://leegoheun9-bit.github.io/sura-/`);
+      prompt("Copy this link to share:", `[Sura AI] ${verdict.title} - ${shareUrl}`);
     }
   });
 }
@@ -1167,6 +1169,46 @@ function loadUserData() {
   }
 }
 
+// --- [Shared Result Handler] ---
+function checkSharedResult() {
+  const params = new URLSearchParams(window.location.search);
+  const title = params.get('title');
+  const desc = params.get('desc');
+
+  if (title && desc) {
+    // Show Modal
+    const modal = document.createElement('div');
+    modal.className = 'premium-modal-overlay fade-in';
+    modal.style.zIndex = '30000'; // Higher than others
+    modal.innerHTML = `
+      <div class="premium-card">
+        <div style="font-size:40px; margin-bottom:10px;">📜</div>
+        <h2 class="serif" style="margin-bottom:5px; color:var(--obang-black);">Royal Decree</h2>
+        <div style="font-size:12px; opacity:0.6; margin-bottom:15px; color:var(--obang-black);">MESSAGE FROM A FRIEND</div>
+        
+        <div style="background:#fdf5e6; padding:15px; border-radius:15px; border:1px dashed #d2b48c; margin-bottom:20px;">
+           <h3 class="serif" style="color:#8b4513; margin-bottom:5px;">"${title}"</h3>
+           <div style="font-size:14px; color:#5d4037; font-style:italic;">"${desc}"</div>
+        </div>
+
+        <div style="font-size:14px; margin-bottom:20px; color:var(--obang-black);">
+           Your friend has shared their royal meal analysis.<br>
+           <b>Now, let the Royal AI judge YOUR meal!</b>
+        </div>
+
+        <button id="sharedStartBtn" class="primary-btn" style="background:var(--obang-yellow); color:var(--obang-black);">Start My Analysis</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.getElementById('sharedStartBtn').onclick = () => {
+      modal.remove();
+      // Clean URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    };
+  }
+}
+
 // --- Application Boot ---
 function init() {
   // 1. Load Data
@@ -1188,7 +1230,11 @@ function init() {
 
 // Attach Init
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
+    checkSharedResult();
+  });
 } else {
   init();
+  checkSharedResult();
 }
