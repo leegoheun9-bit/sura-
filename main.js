@@ -593,19 +593,27 @@ function handlePhotoUpload() {
     reader.onload = (event) => {
       currentState.tempImage = event.target.result; // Store for analysis view
 
-      // Generate Random Core Data for this meal
-      const kcal = Math.floor(Math.random() * (700 - 300) + 300);
+      // Generate Deterministic Data based on file (so same photo = same result)
+      const seed = file.size + file.lastModified;
+      const pseudoRandom = (offset) => {
+        const x = Math.sin(seed + offset) * 10000;
+        return x - Math.floor(x);
+      };
+
+      const kcal = Math.floor(pseudoRandom(1) * (700 - 300) + 300);
+      const protein = Math.floor(pseudoRandom(2) * (40 - 10) + 10);
+      const fat = Math.floor(pseudoRandom(3) * (30 - 5) + 5);
+      const carbs = Math.floor(pseudoRandom(4) * (80 - 20) + 20);
+
       const newMeal = {
         date: new Date().toLocaleDateString(),
         timestamp: Date.now(),
-        image: currentState.tempImage,
         calories: kcal,
-        protein: Math.floor(kcal * 0.25 / 4),
-        fat: Math.floor(kcal * 0.25 / 9),
-        carbs: Math.floor(kcal * 0.5 / 4),
-        name: "Sura Meal #" + (currentState.user.mealHistory ? currentState.user.mealHistory.length + 1 : 1)
+        protein: protein,
+        fat: fat,
+        carbs: carbs,
+        image: currentState.tempImage
       };
-
       // Add to History
       if (!currentState.user.mealHistory) currentState.user.mealHistory = [];
       currentState.user.mealHistory.push(newMeal);
