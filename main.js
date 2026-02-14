@@ -303,7 +303,28 @@ const realisticGoblin = (status = 'happy') => {
 </svg>`;
 };
 
-const realisticTiger = `<svg viewBox="0 0 200 200" style="width:100%; height:100%;"><defs><radialGradient id="tigerFace" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:#FFA500" /><stop offset="100%" style="stop-color:#FF8C00" /></radialGradient></defs><circle cx="50" cy="50" r="15" fill="#FF8C00" stroke="#1A1A1A" stroke-width="1.5"/><circle cx="150" cy="50" r="15" fill="#FF8C00" stroke="#1A1A1A" stroke-width="1.5"/><ellipse cx="100" cy="100" rx="70" ry="65" fill="url(#tigerFace)" stroke="#1A1A1A" stroke-width="1.5"/><path d="M75 50 L85 70 M125 50 L115 70 M100 45 L100 65" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/><path d="M35 100 L55 100 M165 100 L145 100" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/><path d="M40 120 L55 115 M160 120 L145 115" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/><ellipse cx="70" cy="95" rx="12" ry="8" fill="white"/><circle cx="70" cy="95" r="5" fill="#1A1A1A"/><ellipse cx="130" cy="95" rx="12" ry="8" fill="white"/><circle cx="130" cy="95" r="5" fill="#1A1A1A"/><path d="M75 135 Q100 160 125 135" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/></svg>`;
+const realisticTiger = `<svg viewBox="0 0 200 200" style="width:100%; height:100%; filter:drop-shadow(0 0 8px cyan); overflow:visible;">
+<defs>
+  <linearGradient id="demonFur" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#001f3f" /><stop offset="100%" style="stop-color:#000" /></linearGradient>
+  <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#00ffff" /><stop offset="100%" style="stop-color:#008b8b" /></linearGradient>
+</defs>
+<!-- Aura -->
+<circle cx="100" cy="100" r="70" fill="none" stroke="cyan" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"><animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="10s" repeatCount="indefinite"/></circle>
+<!-- Ears -->
+<path d="M40 30 L80 60 L30 90 Z" fill="url(#demonFur)" stroke="cyan" stroke-width="2"/>
+<path d="M160 30 L120 60 L170 90 Z" fill="url(#demonFur)" stroke="cyan" stroke-width="2"/>
+<!-- Face -->
+<path d="M50 70 Q100 40 150 70 L140 160 Q100 190 60 160 Z" fill="url(#demonFur)" stroke="cyan" stroke-width="2"/>
+<!-- Eyes (Glowing) -->
+<path d="M65 100 L95 105 L75 115 Z" fill="#00ffff" filter="drop-shadow(0 0 5px cyan)"/>
+<path d="M135 100 L105 105 L125 115 Z" fill="#00ffff" filter="drop-shadow(0 0 5px cyan)"/>
+<!-- Stripes -->
+<path d="M100 60 L100 85 M80 70 L90 85 M120 70 L110 85" stroke="cyan" stroke-width="3" stroke-linecap="round"/>
+<path d="M40 130 L70 140 M160 130 L130 140" stroke="cyan" stroke-width="2"/>
+<!-- Nose/Mouth -->
+<path d="M90 145 L110 145 L100 160 Z" fill="white"/>
+<path d="M100 160 L90 170 M100 160 L110 170" stroke="cyan" stroke-width="2"/>
+</svg>`;
 const realisticMagpie = `<svg viewBox="0 0 200 200" style="width:100%; height:100%;"><defs><linearGradient id="magpieBlue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#1A1A1A" /><stop offset="50%" style="stop-color:#2E5A88" /><stop offset="100%" style="stop-color:#1A1A1A" /></linearGradient></defs><path d="M40 100 L10 160 Q0 170 20 175 L60 120 Z" fill="url(#magpieBlue)" stroke="#000" stroke-width="0.5"/><path d="M120 120 Q90 140 60 130 Q40 100 60 70 Q90 60 120 80 Z" fill="#1A1A1A"/><path d="M75 125 Q60 115 65 90 Q80 80 95 95 Z" fill="white"/><circle cx="135" cy="85" r="25" fill="#1A1A1A"/><path d="M155 80 L185 85 L155 95 Z" fill="#333" stroke="#000" stroke-width="0.5"/><circle cx="145" cy="80" r="4" fill="#000"/><circle cx="146.5" cy="78.5" r="1.5" fill="white" opacity="0.9"/><g transform="translate(130, 55) scale(0.6) rotate(-5)"><ellipse cx="0" cy="15" rx="55" ry="12" fill="#333"/><path d="M-20 15 L-15 -15 Q0 -25 15 -15 L20 15 Z" fill="#333"/><circle cx="0" cy="-22" r="3" fill="#E5B200"/></g><path d="M90 135 L85 155 M110 130 L115 150" stroke="#333" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 const norigaeSVG = (color) => `<svg viewBox="0 0 100 150" style="width:100%; height:100%;"><circle cx="50" cy="30" r="15" fill="${color}" opacity="0.8"/><path d="M50 45 L50 70" stroke="${color}" stroke-width="4"/><rect x="35" y="70" width="30" height="40" fill="${color}" rx="5"/><circle cx="50" cy="30" r="5" fill="white" opacity="0.5"/></svg>`;
 const bloomingLotus = (progress) => {
