@@ -760,7 +760,7 @@ function renderAnalysis() {
   const lastMeal = history.length > 0 ? history[history.length - 1] : { calories: 500, protein: 20, fat: 15, carbs: 60 };
   const imageSrc = currentState.tempImage || lastMeal.image || 'https://images.unsplash.com/photo-1541014741259-df529411bc4a?auto=format&fit=crop&q=80&w=800';
 
-  app.innerHTML = `<div class="analysis-page fade-in" style="height:100%; background:#141E30; overflow-y:auto; padding-bottom:100px;"><header class="home-header" style="color:white;"><button id="anBackBtn" style="color:white; background:none; border:none; font-size:32px; cursor:pointer;">←</button><span class="serif">Analysis Result</span><div style="width:32px;"></div></header>
+  app.innerHTML = `<div class="analysis-page fade-in" style="height:100%; background:#141E30; overflow-y:auto; padding-bottom:100px;"><header class="home-header" style="color:white;"><button id="anBackBtn" style="color:white; background:none; border:none; font-size:32px; cursor:pointer;">←</button><span class="serif">Analysis Result</span><button id="anShareBtn" style="color:white; background:none; border:none; font-size:24px; cursor:pointer;">🔗</button></header>
        <div style="padding: 20px;"><div class="food-photo-container"><img src="${imageSrc}" style="width:100%; border-radius:30px; border:3px solid var(--obang-yellow); object-fit: cover;"></div>
          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px;">
            <div style="background:white; border-radius:15px; padding:18px; text-align:center;"><span style="font-size:24px; font-weight:800; display:block; color:var(--obang-black);">${lastMeal.calories}</span><span style="font-size:8px; opacity:0.4; color:var(--obang-black);">KCAL</span></div>
@@ -788,6 +788,9 @@ function renderAnalysis() {
         desc = "Strong fire energy (Protein) detected! Excellent for building the royal guard (Muscles).";
         tip = "Don't forget hydration to cool down your inner heat.";
       }
+
+      // Store verdict for sharing
+      window.currentVerdict = { title, desc };
 
       return `
             <h3 class="serif" style="text-align:center; color:var(--obang-black);">${title}</h3><div class="serif" style="text-align:center; font-style:italic; margin:10px 0; color:var(--obang-black);">"${desc}"</div>
@@ -829,6 +832,20 @@ function renderAnalysis() {
        </div></div>`;
   attach('anBackBtn', () => navigate('home'));
   attach('anHomeBtn', () => navigate('home'));
+
+  // Share Button Logic
+  attach('anShareBtn', () => {
+    const verdict = window.currentVerdict || { title: "Royal Analysis", desc: "Check this out!" };
+    if (navigator.share) {
+      navigator.share({
+        title: 'Sura AI Verdict',
+        text: `[Sura AI] My Meal Verdict: ${verdict.title}\n"${verdict.desc}"\n\nAnalyze yours here:`,
+        url: 'https://leegoheun9-bit.github.io/sura-/'
+      }).catch(console.error);
+    } else {
+      prompt("Copy this link to share:", `[Sura AI] ${verdict.title} - https://leegoheun9-bit.github.io/sura-/`);
+    }
+  });
 }
 
 function renderInsights() {
