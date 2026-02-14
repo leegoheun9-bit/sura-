@@ -437,7 +437,7 @@ function renderHome() {
   app.innerHTML = `
     <div class="screen-wrapper fade-in">
       <header class="home-header">
-        <div id="navHomeLogo" style="cursor:pointer;">${suraLogo(isNight)}</div>
+        <div id="navHomeLogo" style="cursor:pointer;" onclick="handleLogoTap()">${suraLogo(isNight)}</div>
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="display:${currentState.user.isPremium ? 'flex' : 'none'}; background:var(--obang-yellow); color:var(--obang-black); font-size:9px; font-weight:800; padding:4px 10px; border-radius:10px;">ROYAL</div>
             <div class="user-badge" id="navHomeBadge" style="padding:4px; cursor:pointer;"><div class="avatar-ring" style="width:30px; height:30px;"><img src="${currentState.user.profilePic}" style="width:100%;height:100%;object-fit:cover;"></div></div>
@@ -598,6 +598,24 @@ window.handleGoblinTap = () => {
   }
 };
 
+// --- [Filming Cheat Mode] ---
+window.cheatTaps = 0;
+window.cheatMode = null;
+window.handleLogoTap = () => {
+  window.cheatTaps++;
+  if (window.cheatTaps === 5) {
+    window.cheatMode = 'slave';
+    alert("🎬 Cheat Mode Activated: Next result will be 'SLAVE' (1200kcal)!");
+  } else if (window.cheatTaps === 10) {
+    window.cheatMode = 'king';
+    alert("🎬 Cheat Mode Activated: Next result will be 'KING' (450kcal)!");
+  } else if (window.cheatTaps >= 15) {
+    window.cheatMode = null;
+    window.cheatTaps = 0;
+    alert("🎬 Cheat Mode OFF: Back to Random.");
+  }
+};
+
 function handlePhotoUpload() {
   if (!currentState.user.isPremium && currentState.user.dailyUploads >= 3) {
     showUpgradeModal();
@@ -624,17 +642,33 @@ function handlePhotoUpload() {
     reader.onload = (event) => {
       currentState.tempImage = event.target.result; // Store for analysis view
 
-      // Generate Deterministic Data based on file (so same photo = same result)
-      const seed = file.size + file.lastModified;
-      const pseudoRandom = (offset) => {
-        const x = Math.sin(seed + offset) * 10000;
-        return x - Math.floor(x);
-      };
+      // Generate Data
+      let kcal, protein, fat, carbs;
 
-      const kcal = Math.floor(pseudoRandom(1) * (700 - 300) + 300);
-      const protein = Math.floor(pseudoRandom(2) * (40 - 10) + 10);
-      const fat = Math.floor(pseudoRandom(3) * (30 - 5) + 5);
-      const carbs = Math.floor(pseudoRandom(4) * (80 - 20) + 20);
+      if (window.cheatMode === 'slave') {
+        // Force Slave Data (High Carb/Fat)
+        kcal = 1250;
+        protein = 10;
+        fat = 60;
+        carbs = 180;
+      } else if (window.cheatMode === 'king') {
+        // Force King Data (Balanced)
+        kcal = 450;
+        protein = 35;
+        fat = 15;
+        carbs = 45;
+      } else {
+        // Random (Determininstic)
+        const seed = file.size + file.lastModified;
+        const pseudoRandom = (offset) => {
+          const x = Math.sin(seed + offset) * 10000;
+          return x - Math.floor(x);
+        };
+        kcal = Math.floor(pseudoRandom(1) * (700 - 300) + 300);
+        protein = Math.floor(pseudoRandom(2) * (40 - 10) + 10);
+        fat = Math.floor(pseudoRandom(3) * (30 - 5) + 5);
+        carbs = Math.floor(pseudoRandom(4) * (80 - 20) + 20);
+      }
 
       const newMeal = {
         date: new Date().toLocaleDateString(),
