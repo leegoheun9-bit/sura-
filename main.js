@@ -474,7 +474,7 @@ function renderHome() {
     })()}
         <div style="display:flex; justify-content:center; gap:15px; margin-top:12px;">
             <div style="background:rgba(255,255,255,0.1); padding:8px 15px; border-radius:15px; border:1px solid rgba(255,255,255,0.1);"><span style="font-size:10px; opacity:0.6; display:block;">WEIGHT GOAL</span><span style="font-size:14px; font-weight:800; color:var(--obang-yellow);">${currentState.user.weight}kg → 65kg</span></div>
-            <div style="background:rgba(255,255,255,0.1); padding:8px 15px; border-radius:15px; border:1px solid rgba(255,255,255,0.1);"><span style="font-size:10px; opacity:0.6; display:block;">DIET MODE</span><span style="font-size:14px; font-weight:800; color:#1565C0;">Weight Loss</span></div>
+            <div style="background:rgba(255,255,255,0.1); padding:8px 15px; border-radius:15px; border:1px solid rgba(255,255,255,0.1);"><span style="font-size:10px; opacity:0.6; display:block;">DIET MODE</span><span style="font-size:14px; font-weight:800; color:#1A237E;">Weight Loss</span></div>
         </div>
         ${!currentState.user.isPremium ? `<div style="font-size:10px; opacity:0.5; margin-top:10px; font-weight:600;">DAILY LIMIT: ${Math.max(0, remainingUploads)} LIVES LEFT</div>` : ''}
       </section>
