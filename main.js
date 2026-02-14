@@ -460,7 +460,8 @@ function renderHome() {
                                </div>
                                <div style="position:absolute; right:-5px; bottom:-10px; pointer-events:none; transition: all 1s;">${bloomingLotus(currentState.waterProgress || 0)}</div>
         </div>
-        <div class="meal-list-item" onclick="handleTigerTap()" style="flex-direction:column; padding:15px; border-left:4px solid var(--obang-yellow); margin-bottom:0; position:relative; cursor:pointer; active:scale(0.98); overflow:visible;"><div id="tigerIconContainer" style="position:absolute; right:-5px; bottom:-5px; width:80px; height:80px; opacity:1.0; transition:transform 0.2s;">${realisticTiger}</div><div style="font-size:10px; font-weight:800; opacity:0.6;">🐯 MOVEMENT</div><div style="font-size:20px; font-weight:800;">6,420 <span style="font-size:10px; opacity:0.4;">Steps</span></div></div>
+        </div>
+        <div class="meal-list-item" onclick="handleTigerTap()" style="flex-direction:column; padding:15px; border-left:4px solid var(--obang-yellow); margin-bottom:0; position:relative; cursor:pointer; active:scale(0.98); overflow:visible;"><div id="tigerIconContainer" style="position:absolute; right:-5px; bottom:-5px; width:70px; height:70px; opacity:1.0; transition:transform 0.2s;">${realisticTiger}</div><div style="font-size:10px; font-weight:800; opacity:0.6;">🐯 MOVEMENT</div><div style="font-size:20px; font-weight:800;">6,420 <span style="font-size:10px; opacity:0.4;">Steps</span></div></div>
       </section>
       </section>
       <nav class="nav-bar">
