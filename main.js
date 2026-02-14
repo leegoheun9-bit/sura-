@@ -303,27 +303,37 @@ const realisticGoblin = (status = 'happy') => {
 </svg>`;
 };
 
-const realisticTiger = `<svg viewBox="0 0 200 200" style="width:100%; height:100%; filter:drop-shadow(0 0 8px cyan); overflow:visible;">
+const realisticTiger = `<svg viewBox="0 0 200 200" style="width:100%; height:100%; filter:drop-shadow(0 5px 10px rgba(0,0,0,0.2)); overflow:visible;">
 <defs>
-  <linearGradient id="demonFur" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#001f3f" /><stop offset="100%" style="stop-color:#000" /></linearGradient>
-  <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#00ffff" /><stop offset="100%" style="stop-color:#008b8b" /></linearGradient>
+  <linearGradient id="tigerGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFB74D" /><stop offset="100%" style="stop-color:#F57C00" /></linearGradient>
 </defs>
-<!-- Aura -->
-<circle cx="100" cy="100" r="70" fill="none" stroke="cyan" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"><animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="10s" repeatCount="indefinite"/></circle>
 <!-- Ears -->
-<path d="M40 30 L80 60 L30 90 Z" fill="url(#demonFur)" stroke="cyan" stroke-width="2"/>
-<path d="M160 30 L120 60 L170 90 Z" fill="url(#demonFur)" stroke="cyan" stroke-width="2"/>
-<!-- Face -->
-<path d="M50 70 Q100 40 150 70 L140 160 Q100 190 60 160 Z" fill="url(#demonFur)" stroke="cyan" stroke-width="2"/>
-<!-- Eyes (Glowing) -->
-<path d="M65 100 L95 105 L75 115 Z" fill="#00ffff" filter="drop-shadow(0 0 5px cyan)"/>
-<path d="M135 100 L105 105 L125 115 Z" fill="#00ffff" filter="drop-shadow(0 0 5px cyan)"/>
-<!-- Stripes -->
-<path d="M100 60 L100 85 M80 70 L90 85 M120 70 L110 85" stroke="cyan" stroke-width="3" stroke-linecap="round"/>
-<path d="M40 130 L70 140 M160 130 L130 140" stroke="cyan" stroke-width="2"/>
-<!-- Nose/Mouth -->
-<path d="M90 145 L110 145 L100 160 Z" fill="white"/>
-<path d="M100 160 L90 170 M100 160 L110 170" stroke="cyan" stroke-width="2"/>
+<path d="M40 30 L80 60 L30 80 Z" fill="#F57C00" stroke="#333" stroke-width="2"/>
+<path d="M160 30 L120 60 L170 80 Z" fill="#F57C00" stroke="#333" stroke-width="2"/>
+<circle cx="50" cy="50" r="10" fill="white" opacity="0.3"/> 
+
+<!-- Face Shape -->
+<path d="M50 70 Q100 50 150 70 L160 110 Q160 150 100 170 Q40 150 40 110 Z" fill="url(#tigerGold)" stroke="#3E2723" stroke-width="2"/>
+
+<!-- White Fur Areas -->
+<path d="M40 110 Q40 140 70 150 L100 155 L130 150 Q160 140 160 110 L150 110 Q130 120 100 120 Q70 120 50 110 Z" fill="#FFF8E1"/>
+
+<!-- Forehead Stripes (王) -->
+<path d="M100 55 L100 75 M80 65 L120 65 M85 58 L115 58" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+
+<!-- Cheek Stripes -->
+<path d="M45 90 L65 95 M155 90 L135 95" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+<path d="M48 105 L68 108 M152 105 L132 108" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Eyes (Friendly but Strong) -->
+<ellipse cx="80" cy="95" rx="7" ry="9" fill="white" stroke="#333" stroke-width="1"/>
+<circle cx="80" cy="95" r="4" fill="black"/>
+<ellipse cx="120" cy="95" rx="7" ry="9" fill="white" stroke="#333" stroke-width="1"/>
+<circle cx="120" cy="95" r="4" fill="black"/>
+
+<!-- Nose -->
+<path d="M90 125 L110 125 L100 135 Z" fill="#E91E63" opacity="0.8"/>
+<path d="M90 140 Q100 150 110 140" stroke="#333" stroke-width="2" fill="none"/>
 </svg>`;
 const realisticMagpie = `<svg viewBox="0 0 200 200" style="width:100%; height:100%;"><defs><linearGradient id="magpieBlue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#1A1A1A" /><stop offset="50%" style="stop-color:#2E5A88" /><stop offset="100%" style="stop-color:#1A1A1A" /></linearGradient></defs><path d="M40 100 L10 160 Q0 170 20 175 L60 120 Z" fill="url(#magpieBlue)" stroke="#000" stroke-width="0.5"/><path d="M120 120 Q90 140 60 130 Q40 100 60 70 Q90 60 120 80 Z" fill="#1A1A1A"/><path d="M75 125 Q60 115 65 90 Q80 80 95 95 Z" fill="white"/><circle cx="135" cy="85" r="25" fill="#1A1A1A"/><path d="M155 80 L185 85 L155 95 Z" fill="#333" stroke="#000" stroke-width="0.5"/><circle cx="145" cy="80" r="4" fill="#000"/><circle cx="146.5" cy="78.5" r="1.5" fill="white" opacity="0.9"/><g transform="translate(130, 55) scale(0.6) rotate(-5)"><ellipse cx="0" cy="15" rx="55" ry="12" fill="#333"/><path d="M-20 15 L-15 -15 Q0 -25 15 -15 L20 15 Z" fill="#333"/><circle cx="0" cy="-22" r="3" fill="#E5B200"/></g><path d="M90 135 L85 155 M110 130 L115 150" stroke="#333" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 const norigaeSVG = (color) => `<svg viewBox="0 0 100 150" style="width:100%; height:100%;"><circle cx="50" cy="30" r="15" fill="${color}" opacity="0.8"/><path d="M50 45 L50 70" stroke="${color}" stroke-width="4"/><rect x="35" y="70" width="30" height="40" fill="${color}" rx="5"/><circle cx="50" cy="30" r="5" fill="white" opacity="0.5"/></svg>`;
