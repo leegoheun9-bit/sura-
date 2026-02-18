@@ -2,362 +2,362 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SURA AI - Royal Wellness</title>
-    <style>
-        /* --- 1. CSS STYLES (Full Royal Theme) --- */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Outfit:wght@300;400;600&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SURA AI - Royal Wellness</title>
+  <style>
+    /* --- 1. CSS STYLES (Full Royal Theme) --- */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Outfit:wght@300;400;600&display=swap');
 
-        :root {
-            --obang-white: #FCFAf2;
-            --obang-black: #1A1A1A;
-            --obang-blue: #2E5A88;
-            --obang-red: #B22222;
-            --obang-yellow: #E5B200;
-            --bg-main: var(--obang-white);
-            --bg-card: white;
-            --text-main: var(--obang-black);
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+    :root {
+      --obang-white: #FCFAf2;
+      --obang-black: #1A1A1A;
+      --obang-blue: #2E5A88;
+      --obang-red: #B22222;
+      --obang-yellow: #E5B200;
+      --bg-main: var(--obang-white);
+      --bg-card: white;
+      --text-main: var(--obang-black);
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+      --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        /* Moods */
-        #app.mood-night {
-            --bg-main: #2C3E50;
-            --bg-card: rgba(255, 255, 255, 0.1);
-            --text-main: #E0E0E0;
-        }
+    /* Moods */
+    #app.mood-night {
+      --bg-main: #2C3E50;
+      --bg-card: rgba(255, 255, 255, 0.1);
+      --text-main: #E0E0E0;
+    }
 
-        #app.mood-night .user-badge,
-        #app.mood-night .meal-list-item,
-        #app.mood-night .nav-bar,
-        #app.mood-night .norigae-item {
-            background: rgba(255, 255, 255, 0.08) !important;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
-        }
+    #app.mood-night .user-badge,
+    #app.mood-night .meal-list-item,
+    #app.mood-night .nav-bar,
+    #app.mood-night .norigae-item {
+      background: rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: white !important;
+    }
 
-        /* Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: #1a1a1a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            overflow: hidden;
-        }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-        #app {
-            width: 100%;
-            max-width: 430px;
-            height: 100vh;
-            background: var(--bg-main);
-            position: relative;
-            overflow-y: auto;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-        }
+    #app {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      background: var(--bg-main);
+      position: relative;
+      overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        .serif {
-            font-family: 'Noto Serif KR', serif;
-        }
+    h1,
+    h2,
+    h3,
+    h4,
+    .serif {
+      font-family: 'Noto Serif KR', serif;
+    }
 
-        /* Components */
-        .screen-wrapper {
-            padding-bottom: 90px;
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+    /* Components */
+    .screen-wrapper {
+      padding-bottom: 90px;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .home-header {
-            padding: 25px 25px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .home-header {
+      padding: 25px 25px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 430px;
-            height: 85px;
-            background: var(--bg-card);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: 85px;
+      background: var(--bg-card);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
 
-        .nav-link {
-            font-size: 10px;
-            color: #888;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .nav-link {
+      font-size: 10px;
+      color: #888;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .nav-link.active {
-            color: var(--obang-yellow);
-            font-weight: 800;
-            transform: translateY(-2px);
-        }
+    .nav-link.active {
+      color: var(--obang-yellow);
+      font-weight: 800;
+      transform: translateY(-2px);
+    }
 
-        .meal-list-item {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 15px;
-            box-shadow: var(--shadow-soft);
-            transition: 0.3s;
-        }
+    .meal-list-item {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 15px;
+      box-shadow: var(--shadow-soft);
+      transition: 0.3s;
+    }
 
-        .camera-btn-large {
-            width: 100%;
-            background: var(--obang-black);
-            border-radius: 40px;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(229, 178, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
+    .camera-btn-large {
+      width: 100%;
+      background: var(--obang-black);
+      border-radius: 40px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(229, 178, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
 
-        .camera-btn-large::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, var(--obang-yellow), transparent 30%);
-            animation: rotate 4s linear infinite;
-            opacity: 0.2;
-            pointer-events: none;
-        }
+    .camera-btn-large::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, var(--obang-yellow), transparent 30%);
+      animation: rotate 4s linear infinite;
+      opacity: 0.2;
+      pointer-events: none;
+    }
 
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
 
-            to {
-                transform: rotate(360deg);
-            }
-        }
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-        .primary-btn {
-            width: 100%;
-            background: var(--obang-black);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 16px;
-            font-weight: 800;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .primary-btn {
+      width: 100%;
+      background: var(--obang-black);
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .input-group input {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            background: #f9f9f9;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+    .input-group input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #eee;
+      background: #f9f9f9;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
 
-        /* Effects */
-        .fade-in {
-            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+    /* Effects */
+    .fade-in {
+      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .ink-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 9999;
-            pointer-events: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .ink-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .ink-transition div {
-            width: 200vw;
-            height: 200vw;
-            background: radial-gradient(circle, #000 0%, transparent 70%);
-            animation: inkSpread 1.5s ease forwards;
-            border-radius: 50%;
-            transform: scale(0);
-        }
+    .ink-transition div {
+      width: 200vw;
+      height: 200vw;
+      background: radial-gradient(circle, #000 0%, transparent 70%);
+      animation: inkSpread 1.5s ease forwards;
+      border-radius: 50%;
+      transform: scale(0);
+    }
 
-        @keyframes inkSpread {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
+    @keyframes inkSpread {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
 
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
 
-        /* Error Log */
-        #errorLog {
-            color: red;
-            font-size: 10px;
-            padding: 20px;
-            display: none;
-            white-space: pre-wrap;
-        }
-    </style>
-    <script>
-        // --- 0. SAFETY FIRST ---
-        window.onerror = function (msg, url, line) {
-            const el = document.getElementById('errorLog');
-            if (el) { el.style.display = 'block'; el.innerText += `\n[Error] ${msg} (Line ${line})`; }
-            return false;
-        };
-    </script>
+    /* Error Log */
+    #errorLog {
+      color: red;
+      font-size: 10px;
+      padding: 20px;
+      display: none;
+      white-space: pre-wrap;
+    }
+  </style>
+  <script>
+    // --- 0. SAFETY FIRST ---
+    window.onerror = function (msg, url, line) {
+      const el = document.getElementById('errorLog');
+      if (el) { el.style.display = 'block'; el.innerText += `\n[Error] ${msg} (Line ${line})`; }
+      return false;
+    };
+  </script>
 </head>
 
 <body>
-    <div id="app">
-        <!-- Loading State -->
-        <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-            <h2 class="serif">SURA</h2>
-            <p style="opacity:0.6; margin-top:10px;">Awakening...</p>
-            <div id="errorLog"></div>
-        </div>
+  <div id="app">
+    <!-- Loading State -->
+    <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+      <h2 class="serif">SURA</h2>
+      <p style="opacity:0.6; margin-top:10px;">Awakening...</p>
+      <div id="errorLog"></div>
     </div>
+  </div>
 
-    <script>
-        /**
-         * SURA AI: FULL VERSION (Restored)
-         * Integrated Single-File Architecture
-         */
+  <script>
+    /**
+     * SURA AI: FULL VERSION (Restored)
+     * Integrated Single-File Architecture
+     */
 
-        // --- 1. CORE UTILITIES ---
-        const app = document.getElementById('app');
-        const safeStorage = {
-            get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
-            set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { } },
-            remove: (k) => { try { localStorage.removeItem(k); } catch (e) { } }
-        };
+    // --- 1. CORE UTILITIES ---
+    const app = document.getElementById('app');
+    const safeStorage = {
+      get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+      set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { } },
+      remove: (k) => { try { localStorage.removeItem(k); } catch (e) { } }
+    };
 
-        // Global State
-        let state = {
-            screen: 'onboarding',
-            user: {
-                name: 'Traveler', profilePic: 'https://i.pravatar.cc/150?u=sura',
-                gender: 'Male', height: 170, weight: 65,
-                norigaeCount: 1, isPremium: false,
-                unlockedItems: [], equippedItem: null,
-                unlockedSkins: [], equippedSkin: null,
-                mealHistory: [] // { date, calories, carbs, protein, fat, image }
-            },
-            water: 0.6
-        };
+    // Global State
+    let state = {
+      screen: 'onboarding',
+      user: {
+        name: 'Traveler', profilePic: 'https://i.pravatar.cc/150?u=sura',
+        gender: 'Male', height: 170, weight: 65,
+        norigaeCount: 1, isPremium: false,
+        unlockedItems: [], equippedItem: null,
+        unlockedSkins: [], equippedSkin: null,
+        mealHistory: [] // { date, calories, carbs, protein, fat, image }
+      },
+      water: 0.6
+    };
 
-        // --- 2. ASSETS (SVG) ---
-        const suraLogo = (isNight) => `<svg viewBox="0 0 100 30" style="height:35px;"><text y="24" font-family="'Noto Serif KR', serif" font-weight="900" font-size="24" fill="${isNight ? '#fff' : '#2E5A88'}">SURA</text><text x="68" y="24" font-size="12" fill="${isNight ? '#fff' : '#2E5A88'}">AI</text><rect x="62" y="8" width="5" height="5" transform="rotate(45 64.5 10.5)" fill="#B22222"/></svg>`;
-        const realisticGoblin = (mood) => `<svg viewBox="0 0 200 200" style="width:100%;height:100%;filter:drop-shadow(0 10px 20px rgba(0,0,0,0.2));"><circle cx="100" cy="100" r="80" fill="#2E5A88"/><circle cx="100" cy="90" r="60" fill="#FFEFD5"/><path d="M70 80 Q100 90 130 80" stroke="#000" stroke-width="3" fill="none"/><circle cx="85" cy="70" r="6" fill="#000"/><circle cx="115" cy="70" r="6" fill="#000"/><path d="M90 120 Q100 ${mood === 'happy' ? '140' : '110'} 110 120" stroke="#000" stroke-width="3" fill="none"/></svg>`;
-        const realisticTiger = `<svg viewBox="0 0 200 200" style="width:100%;height:100%;"><circle cx="100" cy="100" r="80" fill="#E5B200"/><circle cx="70" cy="85" r="5" fill="#000"/><circle cx="130" cy="85" r="5" fill="#000"/><path d="M80 120 Q100 130 120 120" stroke="#000" stroke-width="3" fill="none"/><path d="M50 40 L70 60 M150 40 L130 60" stroke="#000" stroke-width="5"/></svg>`;
-        const norigaeSVG = (color) => `<svg viewBox="0 0 40 80" style="height:40px;"><circle cx="20" cy="10" r="5" fill="${color}"/><line x1="20" y1="10" x2="20" y2="60" stroke="${color}" stroke-width="2"/><circle cx="20" cy="60" r="8" fill="${color}" opacity="0.8"/><path d="M20 60 L10 80 M20 60 L30 80" stroke="${color}" stroke-width="1"/></svg>`;
+    // --- 2. ASSETS (SVG) ---
+    const suraLogo = (isNight) => `<svg viewBox="0 0 100 30" style="height:35px;"><text y="24" font-family="'Noto Serif KR', serif" font-weight="900" font-size="24" fill="${isNight ? '#fff' : '#2E5A88'}">SURA</text><text x="68" y="24" font-size="12" fill="${isNight ? '#fff' : '#2E5A88'}">AI</text><rect x="62" y="8" width="5" height="5" transform="rotate(45 64.5 10.5)" fill="#B22222"/></svg>`;
+    const realisticGoblin = (mood) => `<svg viewBox="0 0 200 200" style="width:100%;height:100%;filter:drop-shadow(0 10px 20px rgba(0,0,0,0.2));"><circle cx="100" cy="100" r="80" fill="#2E5A88"/><circle cx="100" cy="90" r="60" fill="#FFEFD5"/><path d="M70 80 Q100 90 130 80" stroke="#000" stroke-width="3" fill="none"/><circle cx="85" cy="70" r="6" fill="#000"/><circle cx="115" cy="70" r="6" fill="#000"/><path d="M90 120 Q100 ${mood === 'happy' ? '140' : '110'} 110 120" stroke="#000" stroke-width="3" fill="none"/></svg>`;
+    const realisticTiger = `<svg viewBox="0 0 200 200" style="width:100%;height:100%;"><circle cx="100" cy="100" r="80" fill="#E5B200"/><circle cx="70" cy="85" r="5" fill="#000"/><circle cx="130" cy="85" r="5" fill="#000"/><path d="M80 120 Q100 130 120 120" stroke="#000" stroke-width="3" fill="none"/><path d="M50 40 L70 60 M150 40 L130 60" stroke="#000" stroke-width="5"/></svg>`;
+    const norigaeSVG = (color) => `<svg viewBox="0 0 40 80" style="height:40px;"><circle cx="20" cy="10" r="5" fill="${color}"/><line x1="20" y1="10" x2="20" y2="60" stroke="${color}" stroke-width="2"/><circle cx="20" cy="60" r="8" fill="${color}" opacity="0.8"/><path d="M20 60 L10 80 M20 60 L30 80" stroke="${color}" stroke-width="1"/></svg>`;
 
-        // --- 3. LOGIC & SCREENS ---
+    // --- 3. LOGIC & SCREENS ---
 
-        function initApp() {
-            try {
-                const saved = safeStorage.get('sura_user_data');
-                if (saved) {
-                    try {
-                        const parsed = JSON.parse(saved);
-                        state.user = { ...state.user, ...parsed }; // Merge
-                        if (state.user.name) state.screen = 'home';
-                    } catch (e) { safeStorage.remove('sura_user_data'); }
-                }
-                renderScreen(state.screen);
-                updateMood();
-                startFloatingEffects();
-            } catch (e) {
-                document.getElementById('errorLog').style.display = 'block';
-                document.getElementById('errorLog').innerText = "Init Fail: " + e.message;
-            }
+    function initApp() {
+      try {
+        const saved = safeStorage.get('sura_user_data');
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            state.user = { ...state.user, ...parsed }; // Merge
+            if (state.user.name) state.screen = 'home';
+          } catch (e) { safeStorage.remove('sura_user_data'); }
         }
+        renderScreen(state.screen);
+        updateMood();
+        startFloatingEffects();
+      } catch (e) {
+        document.getElementById('errorLog').style.display = 'block';
+        document.getElementById('errorLog').innerText = "Init Fail: " + e.message;
+      }
+    }
 
-        function renderScreen(screen) {
-            state.screen = screen;
-            app.innerHTML = "";
+    function renderScreen(screen) {
+      state.screen = screen;
+      app.innerHTML = "";
 
-            // Ink Effect
-            const ink = document.createElement('div'); ink.className = 'ink-transition';
-            ink.innerHTML = '<div></div>'; document.body.appendChild(ink);
-            setTimeout(() => ink.remove(), 1600);
+      // Ink Effect
+      const ink = document.createElement('div'); ink.className = 'ink-transition';
+      ink.innerHTML = '<div></div>'; document.body.appendChild(ink);
+      setTimeout(() => ink.remove(), 1600);
 
-            try {
-                if (screen === 'onboarding') renderOnboarding();
-                else if (screen === 'home') renderHome();
-                else if (screen === 'recipes') renderRecipes();
-                else if (screen === 'insights') renderInsights();
-                else if (screen === 'settings') renderSettings();
-                else if (screen === 'analysis') renderAnalysis();
-            } catch (e) { console.error(e); app.innerHTML = `<div style="padding:20px;">Error loading ${screen}</div>`; }
-        }
+      try {
+        if (screen === 'onboarding') renderOnboarding();
+        else if (screen === 'home') renderHome();
+        else if (screen === 'recipes') renderRecipes();
+        else if (screen === 'insights') renderInsights();
+        else if (screen === 'settings') renderSettings();
+        else if (screen === 'analysis') renderAnalysis();
+      } catch (e) { console.error(e); app.innerHTML = `<div style="padding:20px;">Error loading ${screen}</div>`; }
+    }
 
-        // -- SCREENS --
+    // -- SCREENS --
 
-        function renderOnboarding() {
-            app.innerHTML = `
+    function renderOnboarding() {
+      app.innerHTML = `
     <div class="screen-wrapper fade-in" style="justify-content:center; padding:40px; text-align:center;">
         <div style="background:white; padding:30px; border-radius:30px; box-shadow:var(--shadow-soft);">
             <div style="width:80px; height:80px; margin:0 auto 20px;">${realisticGoblin('happy')}</div>
@@ -367,22 +367,22 @@
             <button class="primary-btn" onclick="completeOnboarding()">Begin Journey</button>
         </div>
     </div>`;
-        }
-        window.completeOnboarding = () => {
-            const n = document.getElementById('inName').value;
-            if (n) state.user.name = n;
-            saveState(); renderScreen('home');
-        };
+    }
+    window.completeOnboarding = () => {
+      const n = document.getElementById('inName').value;
+      if (n) state.user.name = n;
+      saveState(); renderScreen('home');
+    };
 
-        function renderHome() {
-            const night = app.classList.contains('mood-night');
-            const u = state.user;
-            // Calculate Calories (Mock)
-            const eaten = u.mealHistory.reduce((acc, m) => acc + m.calories, 0);
-            const goal = 2000;
-            const left = goal - eaten;
+    function renderHome() {
+      const night = app.classList.contains('mood-night');
+      const u = state.user;
+      // Calculate Calories (Mock)
+      const eaten = u.mealHistory.reduce((acc, m) => acc + m.calories, 0);
+      const goal = 2000;
+      const left = goal - eaten;
 
-            app.innerHTML = `
+      app.innerHTML = `
     <div class="screen-wrapper fade-in">
         <header class="home-header">
             <div onclick="renderScreen('settings')" style="cursor:pointer;">${suraLogo(night)}</div>
@@ -426,47 +426,50 @@
                      <div style="position:absolute; right:-10px; bottom:-10px; width:60px; opacity:0.8;">${realisticTiger}</div>
                 </div>
             </div>
+            <div style="margin-top:20px; text-align:center; font-size:10px; opacity:0.3;">
+                SURA AI v3.5 - Restored (Ver. 19)
+            </div>
         </div>
         ${navBar('home')}
     </div>`;
+    }
+
+    function renderRecipes() {
+      const tips = [
+        { t: "Chew 30 Times", c: "Royal Chew", d: "The King never rushes. Savour every bite.", i: "👄" },
+        { t: "Water First", c: "Water Dragon", d: "Calm the stomach beast with water before eating.", i: "🐉" },
+        { t: "Greens First", c: "Mountain Spirit", d: "Eat vegetables first to please the mountain gods.", i: "🌿" },
+        { t: "No Distractions", c: "Focus", d: "Do not watch the screen while eating.", i: "📵" }
+      ];
+
+      const recipes = [
+        {
+          name: "Kimchi (김치)", desc: "The Soul of Korea",
+          ing: "Napa cabbage, radish, chili powder, garlic, ginger",
+          tip: "Ferment for at least 2 days for probiotics.",
+          cmt: "Fire energy in a jar! Burns away bad spirits. 🔥"
+        },
+        {
+          name: "Bulgogi (불고기)", desc: "Royal Fire Meat",
+          ing: "Thin beef, soy sauce, pear juice, garlic, sesame oil",
+          tip: "Pear juice makes the meat tender.",
+          cmt: "A royal favorite! The smell summons hungry ghosts. 🥩"
+        },
+        {
+          name: "Japchae (잡채)", desc: "Harmony Noodles",
+          ing: "Glass noodles, spinach, carrots, mushrooms, beef",
+          tip: "Stir-fry each vegetable separately.",
+          cmt: "Colorful like a rainbow! Long noodles mean long life. 🍜"
+        },
+        {
+          name: "Tteokbokki (떡볶이)", desc: "Spicy Rice Cakes",
+          ing: "Rice cakes, fish cakes, gochujang, sugar",
+          tip: "Use anchovy broth for deep flavor.",
+          cmt: "Chewy and spicy! A Dokkaebi's favorite snack. 🍢"
         }
+      ];
 
-        function renderRecipes() {
-            const tips = [
-                { t: "Chew 30 Times", c: "Royal Chew", d: "The King never rushes. Savour every bite.", i: "👄" },
-                { t: "Water First", c: "Water Dragon", d: "Calm the stomach beast with water before eating.", i: "🐉" },
-                { t: "Greens First", c: "Mountain Spirit", d: "Eat vegetables first to please the mountain gods.", i: "🌿" },
-                { t: "No Distractions", c: "Focus", d: "Do not watch the screen while eating.", i: "📵" }
-            ];
-
-            const recipes = [
-                {
-                    name: "Kimchi (김치)", desc: "The Soul of Korea",
-                    ing: "Napa cabbage, radish, chili powder, garlic, ginger",
-                    tip: "Ferment for at least 2 days for probiotics.",
-                    cmt: "Fire energy in a jar! Burns away bad spirits. 🔥"
-                },
-                {
-                    name: "Bulgogi (불고기)", desc: "Royal Fire Meat",
-                    ing: "Thin beef, soy sauce, pear juice, garlic, sesame oil",
-                    tip: "Pear juice makes the meat tender.",
-                    cmt: "A royal favorite! The smell summons hungry ghosts. 🥩"
-                },
-                {
-                    name: "Japchae (잡채)", desc: "Harmony Noodles",
-                    ing: "Glass noodles, spinach, carrots, mushrooms, beef",
-                    tip: "Stir-fry each vegetable separately.",
-                    cmt: "Colorful like a rainbow! Long noodles mean long life. 🍜"
-                },
-                {
-                    name: "Tteokbokki (떡볶이)", desc: "Spicy Rice Cakes",
-                    ing: "Rice cakes, fish cakes, gochujang, sugar",
-                    tip: "Use anchovy broth for deep flavor.",
-                    cmt: "Chewy and spicy! A Dokkaebi's favorite snack. 🍢"
-                }
-            ];
-
-            app.innerHTML = `
+      app.innerHTML = `
     <div class="screen-wrapper fade-in" style="background:#fcfaf2; height:100%;">
         <header class="home-header">
             <h3 class="serif" onclick="renderScreen('home')" style="cursor:pointer; font-size:24px;">← Royal Kitchen</h3>
@@ -523,10 +526,10 @@
         </div>
         ${navBar('recipes')}
     </div>`;
-        }
+    }
 
-        function renderInsights() {
-            app.innerHTML = `
+    function renderInsights() {
+      app.innerHTML = `
     <div class="screen-wrapper fade-in">
         <header class="home-header"><h3 class="serif" onclick="renderScreen('home')" style="cursor:pointer;">← Royal Ledger</h3></header>
         <div style="padding:20px;">
@@ -560,11 +563,11 @@
         </div>
         ${navBar('insights')}
     </div>`;
-        }
+    }
 
-        function renderSettings() {
-            const u = state.user;
-            app.innerHTML = `
+    function renderSettings() {
+      const u = state.user;
+      app.innerHTML = `
     <div class="screen-wrapper fade-in">
         <header class="home-header"><h3 class="serif" onclick="renderScreen('home')" style="cursor:pointer;">← Profile</h3></header>
         <div style="padding:20px;">
@@ -588,10 +591,10 @@
         </div>
         ${navBar('settings')}
     </div>`;
-        }
+    }
 
-        function renderAnalysis() {
-            app.innerHTML = `
+    function renderAnalysis() {
+      app.innerHTML = `
     <div class="screen-wrapper fade-in" style="background:#141E30; color:white; justify-content:center; text-align:center; padding:40px;">
         <div style="width:200px; height:200px; border-radius:30px; overflow:hidden; border:3px solid var(--obang-yellow); margin:0 auto 30px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
             <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#333; color:#888;">Food Photo</div>
@@ -628,76 +631,76 @@
 
         <button class="primary-btn" style="background:var(--obang-yellow); color:black; margin-top:20px;" onclick="finishAnalysis()">Save & Return</button>
     </div>`;
-        }
-        window.finishAnalysis = () => {
-            // Add dummy meal
-            state.user.mealHistory.push({ date: new Date().toLocaleDateString(), calories: 520, protein: 30, carbs: 60, fat: 15 });
-            saveState();
-            renderScreen('home');
-        };
+    }
+    window.finishAnalysis = () => {
+      // Add dummy meal
+      state.user.mealHistory.push({ date: new Date().toLocaleDateString(), calories: 520, protein: 30, carbs: 60, fat: 15 });
+      saveState();
+      renderScreen('home');
+    };
 
-        // --- HELPER COMPONENT ---
-        function navBar(active) {
-            const item = (id, icon, label) => `
+    // --- HELPER COMPONENT ---
+    function navBar(active) {
+      const item = (id, icon, label) => `
         <div class="nav-link ${active === id ? 'active' : ''}" onclick="renderScreen('${id}')">
             <div style="font-size:20px; margin-bottom:2px;">${icon}</div><div>${label}</div>
         </div>`;
-            return `
+      return `
     <nav class="nav-bar">
         ${item('home', '🏠', 'Home')}
         ${item('insights', '📊', 'Insights')}
         ${item('recipes', '📖', 'Recipes')}
         ${item('settings', '👤', 'Profile')}
     </nav>`;
-        }
+    }
 
-        // --- UTILS ---
-        window.handleSnap = () => {
-            // Mock
-            app.innerHTML = `<div style="height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; background:var(--obang-black); color:white;">
+    // --- UTILS ---
+    window.handleSnap = () => {
+      // Mock
+      app.innerHTML = `<div style="height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; background:var(--obang-black); color:white;">
         <div style="font-size:40px; animation:spin 1s infinite;">⏳</div>
         <h3 style="margin-top:20px;">Analyzing...</h3>
     </div>`;
-            setTimeout(() => renderScreen('analysis'), 1500);
-        }
-        window.addWater = () => { state.water += 0.2; renderScreen('home'); }
-        window.resetData = () => { if (confirm('Reset?')) { safeStorage.remove('sura_user_data'); location.reload(); } }
-        window.saveState = () => safeStorage.set('sura_user_data', JSON.stringify(state.user));
+      setTimeout(() => renderScreen('analysis'), 1500);
+    }
+    window.addWater = () => { state.water += 0.2; renderScreen('home'); }
+    window.resetData = () => { if (confirm('Reset?')) { safeStorage.remove('sura_user_data'); location.reload(); } }
+    window.saveState = () => safeStorage.set('sura_user_data', JSON.stringify(state.user));
 
-        window.updateMood = () => {
-            const h = new Date().getHours();
-            if (h < 6 || h > 18) app.classList.add('mood-night');
-            else app.classList.remove('mood-night');
-        }
+    window.updateMood = () => {
+      const h = new Date().getHours();
+      if (h < 6 || h > 18) app.classList.add('mood-night');
+      else app.classList.remove('mood-night');
+    }
 
-        window.startFloatingEffects = () => {
-            // Hangul Floater
-            setInterval(() => {
-                if (state.screen !== 'home') return;
-                const el = document.createElement('div');
-                el.innerText = ['수라', '건강', '복', '꿈'][Math.floor(Math.random() * 4)];
-                el.style.position = 'absolute';
-                el.style.left = Math.random() * 80 + 10 + '%';
-                el.style.bottom = '-50px';
-                el.style.opacity = '0.1';
-                el.style.fontSize = Math.random() * 20 + 10 + 'px';
-                el.style.pointerEvents = 'none';
-                el.style.transition = 'transform 10s linear, opacity 10s ease';
-                el.style.fontFamily = 'serif';
-                app.appendChild(el);
+    window.startFloatingEffects = () => {
+      // Hangul Floater
+      setInterval(() => {
+        if (state.screen !== 'home') return;
+        const el = document.createElement('div');
+        el.innerText = ['수라', '건강', '복', '꿈'][Math.floor(Math.random() * 4)];
+        el.style.position = 'absolute';
+        el.style.left = Math.random() * 80 + 10 + '%';
+        el.style.bottom = '-50px';
+        el.style.opacity = '0.1';
+        el.style.fontSize = Math.random() * 20 + 10 + 'px';
+        el.style.pointerEvents = 'none';
+        el.style.transition = 'transform 10s linear, opacity 10s ease';
+        el.style.fontFamily = 'serif';
+        app.appendChild(el);
 
-                requestAnimationFrame(() => {
-                    el.style.transform = `translateY(-100vh) rotate(${Math.random() * 20}deg)`;
-                    el.style.opacity = '0';
-                });
-                setTimeout(() => el.remove(), 10000);
-            }, 3000);
-        }
+        requestAnimationFrame(() => {
+          el.style.transform = `translateY(-100vh) rotate(${Math.random() * 20}deg)`;
+          el.style.opacity = '0';
+        });
+        setTimeout(() => el.remove(), 10000);
+      }, 3000);
+    }
 
-        // --- BOOT ---
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initApp);
-        else initApp();
-    </script>
+    // --- BOOT ---
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initApp);
+    else initApp();
+  </script>
 </body>
 
 </html>
