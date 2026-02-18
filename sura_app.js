@@ -1,5 +1,4 @@
 // JavaScript Entry Point
-
 const app = document.querySelector('#app');
 
 // --- [State Management with Persistence] ---
@@ -56,63 +55,74 @@ const inkWashEffect = () => {
 };
 
 // --- [Sound & Interaction] ---
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+// --- [Sound & Interaction] ---
+let audioCtx = null;
 const playSound = (type) => {
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
+  try {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) audioCtx = new AudioContext();
+    }
+    if (!audioCtx) return;
 
-  const now = audioCtx.currentTime;
-  if (type === 'click') {
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(600, now);
-    osc.frequency.exponentialRampToValueAtTime(300, now + 0.1);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-    osc.start(now);
-    osc.stop(now + 0.1);
-  } else if (type === 'coin') {
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(1200, now);
-    osc.frequency.setValueAtTime(1600, now + 0.1);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.linearRampToValueAtTime(0, now + 0.3);
-    osc.start(now);
-    osc.stop(now + 0.3);
-  } else if (type === 'magic') {
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(400, now);
-    osc.frequency.linearRampToValueAtTime(1000, now + 0.5);
-    gain.gain.setValueAtTime(0.05, now);
-    gain.gain.linearRampToValueAtTime(0, now + 0.5);
-    osc.start(now);
-    osc.stop(now + 0.5);
-  } else if (type === 'shutter') {
-    // Simple noise burst simulation
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(100, now);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-    osc.start(now);
-    osc.stop(now + 0.1);
-  } else if (type === 'chirp') {
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(2500, now);
-    osc.frequency.linearRampToValueAtTime(1500, now + 0.1);
-    gain.gain.setValueAtTime(0.05, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-    osc.start(now);
-    osc.stop(now + 0.1);
-  } else if (type === 'water') {
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, now);
-    osc.frequency.exponentialRampToValueAtTime(400, now + 0.15);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
-    osc.start(now);
-    osc.stop(now + 0.15);
+    if (audioCtx.state === 'suspended') audioCtx.resume().catch(e => console.warn(e));
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    const now = audioCtx.currentTime;
+    if (type === 'click') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(300, now + 0.1);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } else if (type === 'coin') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1200, now);
+      osc.frequency.setValueAtTime(1600, now + 0.1);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.linearRampToValueAtTime(0, now + 0.3);
+      osc.start(now);
+      osc.stop(now + 0.3);
+    } else if (type === 'magic') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(400, now);
+      osc.frequency.linearRampToValueAtTime(1000, now + 0.5);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.linearRampToValueAtTime(0, now + 0.5);
+      osc.start(now);
+      osc.stop(now + 0.5);
+    } else if (type === 'shutter') {
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(100, now);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } else if (type === 'chirp') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(2500, now);
+      osc.frequency.linearRampToValueAtTime(1500, now + 0.1);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } else if (type === 'water') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, now);
+      osc.frequency.exponentialRampToValueAtTime(400, now + 0.15);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+      osc.start(now);
+      osc.stop(now + 0.15);
+    }
+  } catch (e) {
+    console.warn("Audio error:", e);
   }
 };
 
@@ -213,24 +223,41 @@ window.handleGoblinTap = () => {
 
 // --- [Navigation & Core Logic] ---
 function navigate(screen) {
-  playSound('click');
-  inkWashEffect();
+  try {
+    if (typeof playSound === 'function') playSound('click');
+    if (typeof inkWashEffect === 'function') inkWashEffect();
+  } catch (e) {
+    console.warn("Effect error:", e);
+  }
+
   setTimeout(() => {
-    if (screen === 'onboarding') renderOnboarding();
-    else if (screen === 'home') renderHome();
-    else if (screen === 'analysis') renderAnalysis();
-    else if (screen === 'insights') renderInsights();
-    else if (screen === 'settings') renderSettings();
-    app.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      if (screen === 'onboarding') renderOnboarding();
+      else if (screen === 'home') renderHome();
+      else if (screen === 'analysis') renderAnalysis();
+      else if (screen === 'insights') renderInsights();
+      else if (screen === 'recipes') renderRecipes();
+      else if (screen === 'settings') renderSettings();
+      app.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      alert("Navigation Error: " + e.message);
+      console.error(e);
+    }
   }, 650);
 }
+
+
+
+
 
 const attach = (id, fn) => {
   const el = document.getElementById(id);
   if (el) el.onclick = (e) => { if (e) e.preventDefault(); fn(); };
 };
 
-window.globalNavigate = (screen) => navigate(screen);
+window.globalNavigate = (screen) => {
+  navigate(screen);
+};
 window.globalGender = (gender, el) => {
   document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
@@ -495,10 +522,10 @@ function renderHome() {
       </section>
       </section>
       <nav class="nav-bar">
-        <div class="nav-link active">🏠<span>Home</span></div>
-        <div class="nav-link" id="navHomeToInsights">📊<span>Insights</span></div>
-        <div class="nav-link">📖<span>Recipes</span></div>
-        <div class="nav-link" id="navHomeToProf">👤<span>Profile</span></div>
+        <div class="nav-link active" onclick="globalNavigate('home')">🏠<span>Home</span></div>
+        <div class="nav-link" id="navHomeToInsights" onclick="globalNavigate('insights')">📊<span>Insights</span></div>
+        <div class="nav-link" id="navHomeToRecipes" onclick="globalNavigate('recipes')">📖<span>Recipes</span></div>
+        <div class="nav-link" id="navHomeToProf" onclick="globalNavigate('settings')">👤<span>Profile</span></div>
       </nav>
     </div>
   `;
@@ -506,6 +533,7 @@ function renderHome() {
   attach('navHomeLogo', () => navigate('settings'));
   attach('navHomeBadge', () => navigate('settings'));
   attach('navHomeToProf', () => navigate('settings'));
+  attach('navHomeToRecipes', () => navigate('recipes'));
   attach('navHomeToInsights', () => navigate('insights')); // fixed duplicate Attach
 
   if (currentState.pendingReward) {
@@ -985,18 +1013,174 @@ function renderInsights() {
         </div>
       </div>
       <nav class="nav-bar">
-        <div class="nav-link" id="navInsToHome">🏠<span>Home</span></div>
-        <div class="nav-link active">📊<span>Insights</span></div>
-        <div class="nav-link">📖<span>Recipes</span></div>
-        <div class="nav-link" id="navInsToProf">👤<span>Profile</span></div>
+        <div class="nav-link" id="navInsToHome" onclick="globalNavigate('home')">🏠<span>Home</span></div>
+        <div class="nav-link active" onclick="globalNavigate('insights')">📊<span>Insights</span></div>
+        <div class="nav-link" id="navInsToRecipes" onclick="globalNavigate('recipes')">📖<span>Recipes</span></div>
+        <div class="nav-link" id="navInsToProf" onclick="globalNavigate('settings')">👤<span>Profile</span></div>
       </nav>
     </div>
   `;
   attach('insBackBtn', () => navigate('home'));
   attach('navInsToHome', () => navigate('home'));
   attach('navInsToProf', () => navigate('settings'));
-  attach('navInsToRecipes', () => alert("The Royal Kitchen is preparing recipes!"));
+  attach('navInsToRecipes', () => navigate('recipes'));
 }
+
+function renderRecipes() {
+  const tips = [
+    {
+      title: "물룡의 비밀 (Water Dragon's Secret)",
+      content: "식사 30분 전, 물 한 잔을 마셔라.",
+      comment: "배고픈 짐승(위장)을 물로 먼저 달래는 것이지! 🐉"
+    },
+    {
+      title: "임금님의 수라상 (Royal Chew)",
+      content: "한 입에 30번 이상 씹으라.",
+      comment: "누가 쫓아오느냐? 임금은 결코 서두르지 않는 법! 👑"
+    },
+    {
+      title: "푸른 산의 기운 (Green Energy)",
+      content: "채소를 가장 먼저 섭취하라.",
+      comment: "풀을 먼저 먹어야 뱃속의 산신령이 노하지 않는다네. 🌿"
+    },
+    {
+      title: "천연의 맛 (Nature's Flavor)",
+      content: "소금과 설탕을 줄이고 식재료 본연의 맛을 즐겨라.",
+      comment: "자극적인 맛은 혀를 속일 뿐! 본연의 맛이 진짜 보약이니라. 🧂"
+    },
+    {
+      title: "겸손한 선비의 그릇 (Scholar's Bowl)",
+      content: "작은 그릇에 담아 천천히 즐겨라.",
+      comment: "그릇이 작아도 마음이 넓으면 배가 부른 법! 🥣"
+    }
+  ];
+
+  const recipes = [
+    {
+      name: "Kimchi (김치)",
+      desc: "The Soul of Korea",
+      ingredients: "Napa cabbage, radish, chili powder (gochugaru), garlic, ginger, fish sauce.",
+      tip: "Ferment for at least 2 days at room temperature for that tangy kick!",
+      comment: "Fire energy in a jar! It burns away the bad spirits (and bacteria). 🔥"
+    },
+    {
+      name: "Bulgogi (불고기)",
+      desc: "Fire Meat",
+      ingredients: "Thinly sliced beef, soy sauce, sugar, sesame oil, garlic, pear juice.",
+      tip: "Marinate for at least 3 hours. Pear juice makes the meat tender!",
+      comment: "A royal favorite! The smell alone summons hungry ghosts. 🥩"
+    },
+    {
+      name: "Japchae (잡채)",
+      desc: "Harmony of Vegetables",
+      ingredients: "Glass noodles (dangmyeon), spinach, carrots, mushrooms, beef, soy sauce.",
+      tip: "Stir-fry each vegetable separately to keep their colors bright.",
+      comment: "Colorful like a rainbow! Long noodles mean long life. 🍜"
+    },
+    {
+      name: "Galbi-jjim (갈비찜)",
+      desc: "Braised Short Ribs",
+      ingredients: "Beef short ribs, soy sauce, sugar, mirin, radish, carrots, chestnuts.",
+      tip: "Soak ribs in cold water for 1 hour to remove blood. Slow cook for tenderness.",
+      comment: "Prepare this for a feast! It melts in your mouth like snow. 🍖"
+    },
+    {
+      name: "Tteokbokki (떡볶이)",
+      desc: "Spicy Rice Cakes",
+      ingredients: "Rice cakes (tteok), fish cakes, gochujang, gochugaru, sugar, green onions.",
+      tip: "Use anchovy broth instead of water for deeper flavor.",
+      comment: "Chewy and spicy! A Dokkaebi's favorite snack. 🍢"
+    },
+    {
+      name: "Gimbap (김밥)",
+      desc: "Seaweed Rice Rolls",
+      ingredients: "Dried seaweed (gim), rice, spinach, carrots, pickled radish (danmuji), egg, ham.",
+      tip: "Season the rice with sesame oil and salt while it's hot.",
+      comment: "Roll it tight! A perfect meal for a journey. 🍙"
+    },
+    {
+      name: "Namul (나물)",
+      desc: "Seasoned Vegetables",
+      ingredients: "Spinach/Bean sprouts/Fernbrake, sesame oil, garlic, salt, soy sauce.",
+      tip: "Blanch quickly and rinse in cold water to keep the texture crunchy.",
+      comment: "Earth's energy on a plate. Simple yet powerful! 🌿"
+    }
+  ];
+
+  app.innerHTML = `
+    <div class="screen-wrapper fade-in" style="background:#fcfaf2; height:100%;">
+      <header class="home-header">
+        <button id="recBackBtn" style="background:none; border:none; font-size:32px; cursor:pointer;">←</button>
+        <span class="serif" style="font-weight:800; color:var(--obang-black);">Royal Kitchen</span>
+        <div style="width:32px;"></div>
+      </header>
+      
+      <div style="padding: 20px; padding-bottom:100px;">
+        <div style="text-align:center; margin-bottom:25px;">
+             <div style="font-size:40px; margin-bottom:10px;">📜</div>
+             <h2 class="serif" style="color:var(--obang-black); margin-bottom:5px;">Dokkaebi's Secrets</h2>
+             <p style="font-size:12px; opacity:0.6;">Wisdom & Recipes from the Palace</p>
+        </div>
+
+        <h3 class="serif" style="margin-bottom:15px; color:var(--obang-black); border-bottom:2px solid var(--obang-yellow); display:inline-block;">Wise Eating Tips</h3>
+        <div style="display:flex; flex-direction:column; gap:15px; margin-bottom:40px;">
+        ${tips.map((tip, index) => `
+            <div class="meal-list-item" style="flex-direction:column; gap:8px; border-left:4px solid ${index % 2 === 0 ? 'var(--obang-red)' : 'var(--obang-blue)'}; padding:20px;">
+                <div style="font-size:15px; font-weight:800; color:var(--obang-black);">${tip.title}</div>
+                <div style="font-size:13px; color:#444; line-height:1.5;">${tip.content}</div>
+                <div style="background:rgba(229, 178, 0, 0.1); padding:12px; border-radius:12px; border:1px dashed var(--obang-yellow); margin-top:8px; display:flex; gap:10px; align-items:start;">
+                    <div style="font-size:20px;">👹</div>
+                    <div style="font-size:12px; font-weight:700; color:#8b4513; font-style:italic; line-height:1.4;">"${tip.comment}"</div>
+                </div>
+            </div>
+        `).join('')}
+        </div>
+
+        <h3 class="serif" style="margin-bottom:15px; color:var(--obang-black); border-bottom:2px solid var(--obang-red); display:inline-block;">Royal Feast Recipes</h3>
+        <div style="display:grid; grid-template-columns: 1fr; gap:20px;">
+        ${recipes.map(recipe => `
+            <div class="meal-list-item" style="flex-direction:column; padding:20px; background:white; position:relative; overflow:hidden;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                    <div>
+                        <div style="font-size:18px; font-weight:800; color:var(--obang-black);">${recipe.name}</div>
+                        <div style="font-size:12px; opacity:0.6; font-style:italic;">${recipe.desc}</div>
+                    </div>
+                    <div style="font-size:24px;">🍲</div>
+                </div>
+                
+                <div style="margin-bottom:10px;">
+                    <div style="font-size:11px; font-weight:800; color:var(--obang-blue); margin-bottom:4px;">INGREDIENTS</div>
+                    <div style="font-size:13px; color:#555; line-height:1.4;">${recipe.ingredients}</div>
+                </div>
+
+                <div style="margin-bottom:15px;">
+                     <div style="font-size:11px; font-weight:800; color:var(--obang-red); margin-bottom:4px;">CHEF'S TIP</div>
+                     <div style="font-size:13px; color:#555;">${recipe.tip}</div>
+                </div>
+
+                <div style="background:var(--obang-black); color:var(--obang-yellow); padding:10px; border-radius:10px; font-size:12px; font-style:italic; text-align:center;">
+                    "${recipe.comment}"
+                </div>
+            </div>
+        `).join('')}
+        </div>
+      </div>
+
+      <nav class="nav-bar">
+        <div class="nav-link" id="navRecToHome" onclick="globalNavigate('home')">🏠<span>Home</span></div>
+        <div class="nav-link" id="navRecToInsights" onclick="globalNavigate('insights')">📊<span>Insights</span></div>
+        <div class="nav-link active" onclick="globalNavigate('recipes')">📖<span>Recipes</span></div>
+        <div class="nav-link" id="navRecToProf" onclick="globalNavigate('settings')">👤<span>Profile</span></div>
+      </nav>
+    </div>
+  `;
+
+  attach('recBackBtn', () => navigate('home'));
+  attach('navRecToHome', () => navigate('home'));
+  attach('navRecToInsights', () => navigate('insights'));
+  attach('navRecToProf', () => navigate('settings'));
+}
+
 
 window.purchaseSkin = (skin) => {
   if (skin === 'hat') {
@@ -1116,6 +1300,13 @@ function renderSettings() {
 
         <button id="setResetBtn" style="width:100%; border:none; background:none; color:#aaa; padding:10px; font-size:11px; cursor:pointer; text-decoration:underline;">Reset Data</button>
       </div >
+      
+      <nav class="nav-bar">
+        <div class="nav-link" id="navSetToHome" onclick="globalNavigate('home')">🏠<span>Home</span></div>
+        <div class="nav-link" id="navSetToInsights" onclick="globalNavigate('insights')">📊<span>Insights</span></div>
+        <div class="nav-link" id="navSetToRecipes" onclick="globalNavigate('recipes')">📖<span>Recipes</span></div>
+        <div class="nav-link active" onclick="globalNavigate('settings')">👤<span>Profile</span></div>
+      </nav>
     </div >
   `;
   attach('setBackBtn', () => navigate('home'));
